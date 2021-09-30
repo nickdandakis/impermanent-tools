@@ -64,7 +64,7 @@ function IndexPage() {
         <Image src="/images/impermanent-logo.png" width="219" height="49" />
       </a>
       <main>
-        <h1>Compare Impermanent Digital with CryptoPunk</h1>
+        <h1>Compare Impermanent Digital{`\n`}with CryptoPunk</h1>
         <input
           ref={inputRef}
           placeholder="#"
@@ -78,28 +78,30 @@ function IndexPage() {
           }}
         />
         {isValidID && (
-          <div className="compare">
-            <div className="compare-container">
-              {activeMetadataPunk && (
-                <ReactCompareImage
-                  leftImage={activeMetadata.image}
-                  rightImage={`/images/punk-${activeMetadataPunk.value}.png`}
-                  rightImageCss={{
-                    imageRendering: 'auto',
-                    imageRendering: 'crisp-edges',
-                  }}
-                  skeleton={
-                    <div className="skeleton" />
-                  }
-                />
-              )}
-              {!activeMetadataPunk && (
-                <Image
-                  src={activeMetadata.image}
-                  width={500}
-                  height={500}
-                />
-              )}
+          <>
+            <div className="compare">
+              <div className="compare-container">
+                {activeMetadataPunk && (
+                  <ReactCompareImage
+                    leftImage={activeMetadata.image}
+                    rightImage={`/images/punk-${activeMetadataPunk.value}.png`}
+                    rightImageCss={{
+                      imageRendering: 'auto',
+                      imageRendering: 'crisp-edges',
+                    }}
+                    skeleton={
+                      <div className="skeleton" />
+                    }
+                  />
+                )}
+                {!activeMetadataPunk && (
+                  <Image
+                    src={activeMetadata.image}
+                    width={500}
+                    height={500}
+                  />
+                )}
+              </div>
             </div>
             <footer className="metadata-footer">
               <div className="column">
@@ -134,7 +136,7 @@ function IndexPage() {
                 )}
               </div>
             </footer>
-          </div>
+          </>
         )}
       </main>
       <footer className="page-footer">
@@ -192,6 +194,11 @@ function IndexPage() {
           flex: 1;
           padding: 0 20px;
           max-width: 500px;
+        }
+
+        h1 {
+          font-size: 24px;
+          white-space: pre-line;
         }
 
         .id-input {
@@ -287,13 +294,18 @@ function IndexPage() {
         }
 
         @media (max-width: 500px) {
+          .metadata-footer {
+            font-size: 14px;
+          }
+
           .left {
             width: 100%;
             flex-basis: 100%;
             text-align: center;
             justify-content: center;
             order: 1;
-            padding-top: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
           }
 
           .right {
