@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import ReactCompareImage from 'react-compare-image';
@@ -12,11 +12,16 @@ function IndexPage() {
   const router = useRouter();
   const [activeID, setActiveID] = useState('');
   const debouncedActiveID = useDebouncedState(activeID, 333);
+  const inputRef = useRef();
 
   useEffect(() => {
     const [, initialActiveID] = router?.asPath?.match(/id=(\d+)/) || [];
     setActiveID(initialActiveID || '');
   }, []);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [inputRef]);
 
   useEffect(() => {
     router.replace(`?id=${activeID}`, null, {
@@ -41,6 +46,7 @@ function IndexPage() {
         <Image src="/images/impermanent-logo.png" width="219" height="49" />
       </a>
       <input
+        ref={inputRef}
         placeholder="ID"
         className="id-input"
         type="text"
@@ -99,6 +105,11 @@ function IndexPage() {
           width: 100%;
           text-align: center;
           margin-bottom: 40px;
+          color: gray;
+        }
+
+        .id-input:focus {
+          color: black;
         }
 
         .compare {
