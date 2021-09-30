@@ -1,10 +1,10 @@
 html {
-  box-sizing: border-box;
-  font-family: 'Authentic Sans', sans-serif;
+  width: 100%;
+  height: 100%;
 }
 
-body {
-  margin: 0;
+html {
+  box-sizing: border-box;
 }
 
 * {
@@ -18,11 +18,21 @@ body {
   box-sizing: inherit;
 }
 
+body {
+  margin: 0;
+  font-family: "Authentic Sans", sans-serif;
+}
+
 input {
   all: initial;
   font-family: inherit;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Terminal Grotesque', serif;
+  font-family: "Terminal Grotesque", serif;
+}
+
+a {
+  font-size: inherit;
+  text-decoration: none;
 }

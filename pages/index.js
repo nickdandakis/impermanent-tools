@@ -41,7 +41,8 @@ function IndexPage() {
   const hasID = debouncedActiveID.length !== 0;
   const isValidID = (!isNaN(castedID) && (castedID < 4444));
   const activeMetadata = isValidID ? (metadata[castedID]) : null;
-  const hasPunkID = !!activeMetadata?.attributes
+  const activeMetadataPunk = activeMetadata
+    ?.attributes
     ?.find(({ trait_type }) => trait_type.toLowerCase().includes('punk id'));
   const activeMetadataWavelength = activeMetadata
     ?.attributes
@@ -78,49 +79,55 @@ function IndexPage() {
         />
         {isValidID && (
           <div className="compare">
-            {hasPunkID && (
-              <ReactCompareImage
-                leftImage={activeMetadata.image}
-                rightImage={`/images/punk-${castedID}.png`}
-                rightImageCss={{
-                  imageRendering: 'auto',
-                  imageRendering: 'crisp-edges',
-                }}
-                skeleton={
-                  <div className="skeleton" />
-                }
-              />
-            )}
-            {!hasPunkID && (
-              <Image
-                src={activeMetadata.image}
-                width={500}
-                height={500}
-              />
-            )}
+            <div className="compare-container">
+              {activeMetadataPunk && (
+                <ReactCompareImage
+                  leftImage={activeMetadata.image}
+                  rightImage={`/images/punk-${activeMetadataPunk.value}.png`}
+                  rightImageCss={{
+                    imageRendering: 'auto',
+                    imageRendering: 'crisp-edges',
+                  }}
+                  skeleton={
+                    <div className="skeleton" />
+                  }
+                />
+              )}
+              {!activeMetadataPunk && (
+                <Image
+                  src={activeMetadata.image}
+                  width={500}
+                  height={500}
+                />
+              )}
+            </div>
             <footer className="metadata-footer">
               <div className="column">
-                <a
-                  href={`https://opensea.io/assets/${IMPERMANENT_DIGITAL_CONTRACT_ID}/${debouncedActiveID}`}
-                  target="_blank"
-                >
-                  ID #{debouncedActiveID} @OpenSea
-                </a>
-                {hasPunkID && (
+                {isValidID && hasID && (
                   <a
-                    href={`https://opensea.io/assets/${CRYPTO_PUNKS_CONTRACT_ID}/${debouncedActiveID}`}
+                    href={`https://opensea.io/assets/${IMPERMANENT_DIGITAL_CONTRACT_ID}/${debouncedActiveID}`}
                     target="_blank"
                   >
-                    Punk #{debouncedActiveID} @OpenSea
+                    ID #{debouncedActiveID} @OpenSea
                   </a>
+                )}
+                {activeMetadataPunk ? (
+                  <a
+                    href={`https://opensea.io/assets/${CRYPTO_PUNKS_CONTRACT_ID}/${activeMetadataPunk.value}`}
+                    target="_blank"
+                  >
+                    Punk #{activeMetadataPunk.value} @OpenSea
+                  </a>
+                ) : hasID && (
+                  <span>No punk available</span>
                 )}
               </div>
               <div className="column">
                 {activeMetadataWavelength && (
-                  <span>Wavelength: {activeMetadataWavelength.value}</span>
+                  <span>{activeMetadataWavelength.value}</span>
                 )}
                 {activeMetadataLifecycle && (
-                  <span>Lifecycle: {activeMetadataLifecycle.value}</span>
+                  <span>L{activeMetadataLifecycle.value}</span>
                 )}
                 {activeMetadataSignatureEdition && (
                   <span>Signature Edition: {activeMetadataSignatureEdition.value}</span>
@@ -129,41 +136,39 @@ function IndexPage() {
             </footer>
           </div>
         )}
-        {isValidID && !hasPunkID && hasID && (
-          <h4>*no punk available</h4>
-        )}
       </main>
       <footer className="page-footer">
-        <a
-          href="https://opensea.io/collection/impermanent-digital"
-          target="_blank"
-        >
-          <OpenSeaLogo />
-        </a>
-        <a
-          href="http://twitter.com/impermanentID"
-          target="_blank"
-        >
-          <TwitterLogo />
-        </a>
-        <a
-          href="https://discord.gg/p4N4z9Mydk"
-          target="_blank"
-        >
-          <DiscordLogo />
-        </a>
-        <a
-          href="https://github.com/nickdandakis/impermanent-digital-comparison/"
-          target="_blank"
-        >
-          <GithubLogo />
-        </a>
-        <span className="separator">
-          |
-        </span>
-        <span className="last-updated">
-          Last updated: {new Date(metadataMeta.updatedAt).toLocaleDateString()}
-        </span>
+        <div className="left">
+          <span className="last-updated">
+            Last updated: {new Date(metadataMeta.updatedAt).toLocaleDateString()}
+          </span>
+        </div>
+        <div className="right">
+          <a
+            href="https://opensea.io/collection/impermanent-digital"
+            target="_blank"
+          >
+            <OpenSeaLogo />
+          </a>
+          <a
+            href="http://twitter.com/impermanentID"
+            target="_blank"
+          >
+            <TwitterLogo />
+          </a>
+          <a
+            href="https://discord.gg/p4N4z9Mydk"
+            target="_blank"
+          >
+            <DiscordLogo />
+          </a>
+          <a
+            href="https://github.com/nickdandakis/impermanent-digital-comparison/"
+            target="_blank"
+          >
+            <GithubLogo />
+          </a>
+        </div>
       </footer>
       <style jsx>{`
         .page {
@@ -186,6 +191,7 @@ function IndexPage() {
         main {
           flex: 1;
           padding: 0 20px;
+          max-width: 500px;
         }
 
         .id-input {
@@ -203,8 +209,17 @@ function IndexPage() {
         .compare {
           position: relative;
           width: 100%;
-          max-width: 500px;
+          height: 0;
+          padding-top: 100%;
           margin: 0 auto;
+        }
+
+        .compare-container {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
         }
 
         .skeleton {
@@ -242,31 +257,50 @@ function IndexPage() {
         }
 
         .page-footer {
+          box-sizing: border-box;
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          padding: 10px 20px;
+        }
+
+        .right {
+          flex: 1 1 60%;
           display: flex;
           flex-flow: row wrap;
           width: 100%;
           text-align: right;
           justify-content: flex-end;
           align-items: center;
-          padding: 20px 0;
         }
 
-        .page-footer > * {
+        .right > * {
           padding: 10px 20px;
         }
 
+        .left {
+          flex: 1 1 40%;
+          text-align: left;
+          font-size: 14px;
+        }
+
         @media (max-width: 500px) {
-          .page-footer {
+          .left {
+            width: 100%;
+            flex-basis: 100%;
             text-align: center;
             justify-content: center;
+            order: 1;
+            padding-top: 20px;
           }
 
-          .separator {
-            display: none;
-          }
-
-          .last-updated {
+          .right {
             width: 100%;
+            flex-basis: 100%;
+            text-align: center;
+            justify-content: center;
           }
         }
       `}</style>
