@@ -1,0 +1,24 @@
+{
+  "name": "impermanent-digital-comparison",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^11.1.2",
+    "react": "^17.0.2",
+    "react-compare-image": "^3.1.0",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "node-fetch": "^3.0.0",
+    "sharp": "^0.29.1"
+  }
+}
