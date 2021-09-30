@@ -16,6 +16,11 @@ function MyApp({ Component, pageProps }) {
           content="You are wasting my time. Most of us are investors so let's be straight: if this project does not get the shit done as it promised, I will sell all my double-figure NFTs and leave.  You waste all the golden time to promote yourself, sad to see this."
           key="description"
         />
+        <meta
+          property="og:image"
+          content="https://www.impermanent.tools/images/goons-on-moon-og-image.jpg"
+          key="og:image"
+        />
       </Head>
       <Component {...pageProps} />
     </>
