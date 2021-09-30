@@ -25,6 +25,7 @@ function IndexPage() {
   }, [activeID]);
 
   const castedID = Number(debouncedActiveID);
+  const hasID = debouncedActiveID.length !== 0;
   const isValidID = (!isNaN(castedID) && (castedID < 4444));
   const activeMetadata = isValidID ? (metadata[castedID]) : null;
   const hasPunkID = !!activeMetadata?.attributes
@@ -74,7 +75,7 @@ function IndexPage() {
           )}
         </div>
       )}
-      {isValidID && !hasPunkID && (
+      {isValidID && !hasPunkID && hasID && (
         <h4>*no punk available</h4>
       )}
       <style jsx>{`
