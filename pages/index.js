@@ -64,17 +64,17 @@ function IndexPage() {
         <Image src="/images/impermanent-logo.png" width="219" height="49" />
       </a>
       <main>
-        <h1>Compare Impermanent Digital{`\n`}with CryptoPunk</h1>
+        <h1>Compare CryptoPunk{`\n`}with Impermanent Digital</h1>
         <input
           ref={inputRef}
           placeholder="#"
           className="id-input"
           type="text"
           maxLength="5"
-          value={`#${activeID}`}
+          value={activeID}
           onChange={event => {
             const updatedID = event.target.value || '';
-            setActiveID(updatedID.replace(/#/g, ''));
+            setActiveID(updatedID);
           }}
         />
         {isValidID && (
@@ -83,12 +83,12 @@ function IndexPage() {
               <div className="compare-container">
                 {activeMetadataPunk && (
                   <ReactCompareImage
-                    leftImage={activeMetadata.image}
-                    rightImage={`/images/punk-${activeMetadataPunk.value}.png`}
-                    rightImageCss={{
+                    leftImage={`/images/punk-${activeMetadataPunk.value}.png`}
+                    leftImageCss={{
                       imageRendering: 'auto',
                       imageRendering: 'crisp-edges',
                     }}
+                    rightImage={activeMetadata.image}
                     skeleton={
                       <div className="skeleton" />
                     }
@@ -105,14 +105,6 @@ function IndexPage() {
             </div>
             <footer className="metadata-footer">
               <div className="column">
-                {isValidID && hasID && (
-                  <a
-                    href={`https://opensea.io/assets/${IMPERMANENT_DIGITAL_CONTRACT_ID}/${debouncedActiveID}`}
-                    target="_blank"
-                  >
-                    ID #{debouncedActiveID}
-                  </a>
-                )}
                 {activeMetadataPunk ? (
                   <a
                     href={`https://opensea.io/assets/${CRYPTO_PUNKS_CONTRACT_ID}/${activeMetadataPunk.value}`}
@@ -125,6 +117,14 @@ function IndexPage() {
                 )}
               </div>
               <div className="column">
+                {isValidID && hasID && (
+                  <a
+                    href={`https://opensea.io/assets/${IMPERMANENT_DIGITAL_CONTRACT_ID}/${debouncedActiveID}`}
+                    target="_blank"
+                  >
+                    ID #{debouncedActiveID}
+                  </a>
+                )}
                 {activeMetadataWavelength && (
                   <span>{activeMetadataWavelength.value}</span>
                 )}
@@ -257,6 +257,10 @@ function IndexPage() {
           display: flex;
           flex-flow: column;
           justify-content: flex-between;
+        }
+
+        .column + .column {
+          text-align: right;
         }
 
         .column > * {
