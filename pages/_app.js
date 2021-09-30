@@ -1,4 +1,5 @@
 // import App from 'next/app'
+import '../styles/typography.css';
 import '../styles/base.css';
 
 function MyApp({ Component, pageProps }) {

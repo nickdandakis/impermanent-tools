@@ -27,4 +27,9 @@ function sleep(duration) {
   }
 
   await fs.writeFile('data/metadata.json', JSON.stringify(allMetadata, null, 2));
+
+  const now = new Date();
+  await fs.writeFile('data/metadata-meta.json', JSON.stringify({
+    updatedAt: now,
+  }, null, 2));
 })();
