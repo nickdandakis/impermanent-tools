@@ -81,6 +81,7 @@ function IndexPage() {
           <>
             <div className="compare">
               <div className="compare-container">
+                <div className="skeleton" />
                 {activeMetadataPunk && (
                   <ReactCompareImage
                     leftImage={`/images/punk-${activeMetadataPunk.value}.png`}

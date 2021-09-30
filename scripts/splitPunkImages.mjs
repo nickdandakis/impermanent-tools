@@ -5,7 +5,7 @@ const COLUMNS = 100;
 const WIDTH = 24;
 const HEIGHT = 24;
 const MIN_PUNKS_COUNT = 0;
-const MAX_PUNKS_COUNT = 4444;
+const MAX_PUNKS_COUNT = 10000;
 
 (async () => {
   const punksSpritesheetFile = await fs.readFile('public/images/punks.png');
