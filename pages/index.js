@@ -110,7 +110,7 @@ function IndexPage() {
                     href={`https://opensea.io/assets/${IMPERMANENT_DIGITAL_CONTRACT_ID}/${debouncedActiveID}`}
                     target="_blank"
                   >
-                    ID #{debouncedActiveID} @OpenSea
+                    ID #{debouncedActiveID}
                   </a>
                 )}
                 {activeMetadataPunk ? (
@@ -118,7 +118,7 @@ function IndexPage() {
                     href={`https://opensea.io/assets/${CRYPTO_PUNKS_CONTRACT_ID}/${activeMetadataPunk.value}`}
                     target="_blank"
                   >
-                    Punk #{activeMetadataPunk.value} @OpenSea
+                    Punk #{activeMetadataPunk.value}
                   </a>
                 ) : hasID && (
                   <span>No punk available</span>
