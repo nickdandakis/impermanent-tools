@@ -1,9 +1,25 @@
 // import App from 'next/app'
+import Head from 'next/head';
+
 import '../styles/typography.css';
 import '../styles/base.css';
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <Head>
+        <title key="title">
+          Impermanent Tools
+        </title>
+        <meta
+          name="description"
+          content="You are wasting my time. Most of us are investors so let's be straight: if this project does not get the shit done as it promised, I will sell all my double-figure NFTs and leave.  You waste all the golden time to promote yourself, sad to see this."
+          key="description"
+        />
+      </Head>
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 // Only uncomment this method if you have blocking data requirements for
