@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import ReactCompareImage from 'react-compare-image';
 
+import ReactCompareImage from '../components/ReactCompareImage.tsx';
 import DiscordLogo from'../components/DiscordLogo';
 import TwitterLogo from'../components/TwitterLogo';
 import GithubLogo from'../components/GithubLogo';
@@ -88,10 +88,7 @@ function IndexPage() {
                 {activeMetadataPunk && (
                   <ReactCompareImage
                     leftImage={`/images/punk-${activeMetadataPunk.value}.png`}
-                    leftImageCss={{
-                      imageRendering: 'auto',
-                      imageRendering: 'crisp-edges',
-                    }}
+                    leftImageClassName="punk-image"
                     rightImage={activeMetadata.image}
                     skeleton={
                       <div className="skeleton" />
@@ -337,6 +334,13 @@ function IndexPage() {
             text-align: center;
             justify-content: center;
           }
+        }
+      `}</style>
+      <style jsx global>{`
+        .punk-image {
+          image-rendering: auto;
+          image-rendering: crisp-edges;
+          image-rendering: pixelated;
         }
       `}</style>
     </div>
