@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
         </title>
         <meta
           name="description"
-          content="Compare CryptoPunk with Impermanent Digital"
+          content="Compare CryptoPunk with Impermanent Digital, and vice-versa"
           key="description"
         />
         <meta

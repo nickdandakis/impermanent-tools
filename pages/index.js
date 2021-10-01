@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
@@ -9,9 +9,10 @@ import GithubLogo from'../components/GithubLogo';
 import OpenSeaLogo from'../components/OpenSeaLogo';
 import metadata from '../data/metadata.json';
 import metadataMeta from '../data/metadata-meta.json';
-import useDebouncedState from '../hooks/useDebouncedState';
+import punkMap from '../data/punkMap.json';
 import getRandomColor from '../utils/getRandomColor';
 import getRandomInt from '../utils/getRandomInt';
+import useDebouncedCallback from '../hooks/useDebouncedCallback';
 
 const IMPERMANENT_DIGITAL_CONTRACT_ID = '0xa66f3bd98b4741bad68bcd7511163c6f855d2129';
 const CRYPTO_PUNKS_CONTRACT_ID = '0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb';
@@ -21,32 +22,41 @@ const OPENSEA_IMPERMANENT_DIGITAL_SIGNATURE_FILTER_URL = 'https://opensea.io/col
 
 function IndexPage() {
   const router = useRouter();
-  const [activeID, setActiveID] = useState('');
-  const debouncedActiveID = useDebouncedState(activeID, 333);
+  const {
+    id: activeID,
+    isReversed: unparsedIsReversed,
+  } = router.query;
+  const isReversed = (unparsedIsReversed === 'true');
+
   const inputRef = useRef();
+  const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
-    const [, initialActiveID] = router?.asPath?.match(/id=(\d+)/) || [];
-    setActiveID(initialActiveID || '');
-  }, []);
+    setInputValue(activeID);
+  }, [router]);
 
-  useEffect(() => {
-    inputRef.current.focus();
-  }, [inputRef]);
+  const castedID = Number(activeID);
+  const hasID = activeID?.length !== 0;
+  const isValidID = (
+    isReversed
+    ? !isNaN(castedID) && (castedID < 10000)
+    : !isNaN(castedID) && (castedID < 4444)
+  );
 
-  useEffect(() => {
-    router.replace(`?id=${activeID}`, null, {
-      shallow: true,
-    });
-  }, [activeID]);
-
-  const castedID = Number(debouncedActiveID);
-  const hasID = debouncedActiveID.length !== 0;
-  const isValidID = (!isNaN(castedID) && (castedID < 4444));
-  const activeMetadata = isValidID ? (metadata[castedID]) : null;
+  const activeMetadata = (
+    isValidID
+    ? isReversed
+      ? (metadata[Number(punkMap[activeID])])
+      : (metadata[castedID])
+    : null
+  );
   const activeMetadataPunk = activeMetadata
     ?.attributes
     ?.find(({ trait_type }) => trait_type.toLowerCase().includes('punk id'));
+
+  const impermanentID = (isReversed ? punkMap[activeID] : activeID);
+  const punkID = (isReversed ? activeID : activeMetadataPunk?.value);
+
   const activeMetadataWavelength = activeMetadata
     ?.attributes
     ?.find(({ trait_type }) => trait_type.toLowerCase().includes('wavelength'));
@@ -57,28 +67,81 @@ function IndexPage() {
     ?.attributes
     ?.find(({ trait_type }) => trait_type.toLowerCase().includes('signature edition'));
 
-  const randomDegrees = getRandomInt(0, 360);
-  const randomColorA = getRandomColor();
-  const randomColorB = getRandomColor();
+  const randomDegrees = useMemo(() => getRandomInt(0, 360), [activeID]);
+  const randomColorA = useMemo(() => getRandomColor(), [activeID]);
+  const randomColorB = useMemo(() => getRandomColor(), [activeID]);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [inputRef]);
+
+  const updateQueryID = useDebouncedCallback((updatedID) => {
+    router.push({
+      pathname: '/',
+      query: {
+        ...router.query,
+        id: updatedID,
+      }
+    });
+  }, 333, [router]);
+
+  const handleInputChange = useCallback((event) => {
+    const updatedID = event.target.value || '';
+
+    updateQueryID(updatedID);
+    setInputValue(updatedID);
+  }, [router]);
+
+  const handleReverse = (event) => {
+    event.preventDefault();
+
+    const updatedIsReversed = !(router.query.isReversed === 'true');
+
+    const updatedID = (
+      updatedIsReversed
+      ? activeMetadataPunk?.value
+      : punkMap[activeMetadataPunk?.value]
+    );
+
+    router.push({
+      pathname: '/',
+      query: {
+        ...router.query,
+        isReversed: updatedIsReversed,
+        id: updatedID,
+      }
+    });
+
+    setInputValue(updatedID);
+  }
 
   return (
     <div className="page">
-      <a href="https://impermanent.digital/" className="logo-wrapper">
-        <Image src="/images/impermanent-logo.png" width="219" height="49" />
-      </a>
+      <header>
+        <a href="https://impermanent.digital/" className="logo-wrapper">
+          <Image src="/images/impermanent-logo.png" width="219" height="49" />
+        </a>
+        <a href="#reverse" onClick={handleReverse} className="reverse-button">
+          🔄
+          Reverse search
+        </a>
+      </header>
       <main>
-        <h1>Compare CryptoPunk{`\n`}with Impermanent Digital</h1>
+        <h1>
+          Compare&nbsp;
+          {isReversed ? 'Impermanent Digital' : 'CryptoPunk'}
+          {`\n`}
+          with&nbsp;
+          {isReversed ? 'CryptoPunk' : 'Impermanent Digital'}
+        </h1>
         <input
           ref={inputRef}
           placeholder="#"
           className="id-input"
           type="text"
           maxLength="5"
-          value={activeID}
-          onChange={event => {
-            const updatedID = event.target.value || '';
-            setActiveID(updatedID);
-          }}
+          value={inputValue}
+          onChange={handleInputChange}
         />
         {isValidID && (
           <>
@@ -90,12 +153,13 @@ function IndexPage() {
                     leftImage={`/images/punk-${activeMetadataPunk.value}.png`}
                     leftImageClassName="punk-image"
                     rightImage={activeMetadata.image}
+                    rightImageClassName="impermanent-image"
                     skeleton={
                       <div className="skeleton" />
                     }
                   />
                 )}
-                {!activeMetadataPunk && (
+                {!activeMetadataPunk && activeMetadata && (
                   <Image
                     src={activeMetadata.image}
                     width={500}
@@ -114,16 +178,20 @@ function IndexPage() {
                     Punk #{activeMetadataPunk.value}
                   </a>
                 ) : hasID && (
-                  <span>No punk available</span>
+                  <span>
+                    No&nbsp;
+                    {isReversed ? 'Impermanent Digital' : 'CryptoPunk'}
+                    &nbsp;available
+                  </span>
                 )}
               </div>
               <div className="column">
-                {isValidID && hasID && (
+                {isValidID && hasID && impermanentID && (
                   <a
-                    href={`https://opensea.io/assets/${IMPERMANENT_DIGITAL_CONTRACT_ID}/${debouncedActiveID}`}
+                    href={`https://opensea.io/assets/${IMPERMANENT_DIGITAL_CONTRACT_ID}/${impermanentID}`}
                     target="_blank"
                   >
-                    ID #{debouncedActiveID}
+                    ID #{impermanentID}
                   </a>
                 )}
                 {activeMetadataWavelength && (
@@ -199,17 +267,32 @@ function IndexPage() {
           min-height: 100vh;
         }
 
+        header {
+          display: flex;
+          flex-flow: row;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 20px;
+          width: 100%;
+        }
+
         .logo-wrapper{
           display: block;
-          width: 100%;
           max-width: 200px;
-          margin: 20px auto;
         }
 
         main {
           flex: 1;
           padding: 0 20px;
           max-width: 500px;
+        }
+
+        .reverse-button {
+          font-size: 16px;
+          transition: transform 0.1s ease-in-out;
+        }
+        .reverse-button:hover {
+          transform: translateY(2px);
         }
 
         h1 {
@@ -221,7 +304,7 @@ function IndexPage() {
           font-size: 48px;
           width: 100%;
           text-align: center;
-          margin-bottom: 30px;
+          margin-bottom: 20px;
           color: gray;
         }
 
@@ -304,7 +387,7 @@ function IndexPage() {
         }
 
         .right > * {
-          padding: 10px 20px;
+          padding: 10px 18px;
         }
 
         .left {
@@ -314,6 +397,14 @@ function IndexPage() {
         }
 
         @media (max-width: 500px) {
+          .logo-wrapper {
+            max-width: 150px;
+          }
+
+          .reverse-button {
+            font-size: 14px;
+          }
+
           .metadata-footer {
             font-size: 14px;
           }
