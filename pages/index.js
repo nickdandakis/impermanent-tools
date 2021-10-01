@@ -121,7 +121,7 @@ function IndexPage() {
         <Image src="/images/impermanent-logo.png" width="219" height="49" />
       </a>
       
-      <a href="#reverse" onClick={handleReverse}>
+      <a href="#reverse" onClick={handleReverse} className="reverse-button">
         🔄
       </a>
       <main>
@@ -276,6 +276,14 @@ function IndexPage() {
           flex: 1;
           padding: 0 20px;
           max-width: 500px;
+        }
+
+        .reverse-button {
+          font-size: 36px;
+          transition: transform 0.1s ease-in-out;
+        }
+        .reverse-button:hover {
+          transform: translateY(3px);
         }
 
         h1 {
