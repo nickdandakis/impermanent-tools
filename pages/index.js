@@ -117,13 +117,15 @@ function IndexPage() {
 
   return (
     <div className="page">
-      <a href="https://impermanent.digital/" className="logo-wrapper">
-        <Image src="/images/impermanent-logo.png" width="219" height="49" />
-      </a>
-      
-      <a href="#reverse" onClick={handleReverse} className="reverse-button">
-        🔄
-      </a>
+      <header>
+        <a href="https://impermanent.digital/" className="logo-wrapper">
+          <Image src="/images/impermanent-logo.png" width="219" height="49" />
+        </a>
+        <a href="#reverse" onClick={handleReverse} className="reverse-button">
+          🔄
+          Reverse search
+        </a>
+      </header>
       <main>
         <h1>
           Compare&nbsp;
@@ -265,11 +267,18 @@ function IndexPage() {
           min-height: 100vh;
         }
 
+        header {
+          display: flex;
+          flex-flow: row;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 20px;
+          width: 100%;
+        }
+
         .logo-wrapper{
           display: block;
-          width: 100%;
           max-width: 200px;
-          margin: 20px auto;
         }
 
         main {
@@ -279,11 +288,11 @@ function IndexPage() {
         }
 
         .reverse-button {
-          font-size: 36px;
+          font-size: 16px;
           transition: transform 0.1s ease-in-out;
         }
         .reverse-button:hover {
-          transform: translateY(3px);
+          transform: translateY(2px);
         }
 
         h1 {
@@ -295,7 +304,7 @@ function IndexPage() {
           font-size: 48px;
           width: 100%;
           text-align: center;
-          margin-bottom: 30px;
+          margin-bottom: 20px;
           color: gray;
         }
 
@@ -378,7 +387,7 @@ function IndexPage() {
         }
 
         .right > * {
-          padding: 10px 20px;
+          padding: 10px 18px;
         }
 
         .left {
@@ -388,6 +397,14 @@ function IndexPage() {
         }
 
         @media (max-width: 500px) {
+          .logo-wrapper {
+            max-width: 150px;
+          }
+
+          .reverse-button {
+            font-size: 14px;
+          }
+
           .metadata-footer {
             font-size: 14px;
           }
