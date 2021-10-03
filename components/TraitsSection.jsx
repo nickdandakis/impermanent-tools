@@ -13,6 +13,7 @@ import {
   getEvolutionTrait,
   getAdditionalWavelengthTrait,
   getSignatureEditionTrait,
+  getWhitelistTrait,
 } from '../utils/traits';
 
 function TraitsSection({ metadata, isReversed = false }) {
@@ -22,6 +23,7 @@ function TraitsSection({ metadata, isReversed = false }) {
   const traitLifecycle = getLifecycleTrait({ metadata });
   const traitEvolution = getEvolutionTrait({ metadata });
   const traitAfterlife = getAfterlifeTrait({ metadata });
+  const traitWhitelist = getWhitelistTrait({ metadata });
   const traitSignatureEdition = getSignatureEditionTrait({ metadata });
 
   return (
@@ -80,6 +82,11 @@ function TraitsSection({ metadata, isReversed = false }) {
         {traitAfterlife && (
           <span>
             Afterlife: {traitAfterlife.value}
+          </span>
+        )}
+        {traitWhitelist && (
+          <span>
+            Whitelist: {traitWhitelist.value}
           </span>
         )}
         {traitSignatureEdition && (

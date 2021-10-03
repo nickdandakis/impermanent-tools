@@ -53,7 +53,15 @@ function DecisionsStageSection({
   }
 
   const handleSell = () => {
-    onSell();
+    if (confirm('Would you really sell here?')) {
+      if (confirm('What, and just give up on the art?')) {
+        if (confirm("You really don't want to build generational wealth?")) {
+          if (confirm('ngmi?')) {
+            onSell();
+          }
+        }
+      }
+    }
   }
 
   return (

@@ -5,7 +5,7 @@ import {
   getEvolutionTrait,
 } from '../utils/traits';
 
-const revealDate = new Date('2021-09-24T16:00:00Z'); // Sep 24, 2021, 12:00 EST
+export const revealDate = new Date('2021-09-24T16:00:00Z'); // Sep 24, 2021, 12:00 EST
 
 const stages = [
   {
@@ -50,6 +50,10 @@ const stages = [
           trait_type: 'Wavelength',
           value: 'NEW!!!',
         },
+        {
+          trait_type: 'Whitelist',
+          value: '3333 series*',
+        },
       ],
     }),
     onEvolve: ({ metadata }) => ({
@@ -90,12 +94,12 @@ const stages = [
     canBurn: ({ metadata }) => {
       const lifecycleTrait = getLifecycleTrait({ metadata });
       const evolutionTrait = getEvolutionTrait({ metadata });
-      return Number(lifecycleTrait.value) === 2 && Number(evolutionTrait.value) === 2;
+      return Number(lifecycleTrait.value) === 2 && Number(evolutionTrait?.value) === 2;
     },
     canEvolve: ({ metadata }) => {
       const lifecycleTrait = getLifecycleTrait({ metadata });
       const evolutionTrait = getEvolutionTrait({ metadata });
-      return Number(lifecycleTrait.value) === 3 && Number(evolutionTrait.value) === 2;
+      return Number(lifecycleTrait.value) === 3 && Number(evolutionTrait?.value) === 2;
     },
     canSell: () => true,
     onHold: ({ metadata }) => metadata,
@@ -111,6 +115,10 @@ const stages = [
         {
           trait_type: 'Wavelength',
           value: 'NEW!!!',
+        },
+        {
+          trait_type: 'Whitelist',
+          value: '3333 & 2222',
         },
       ],
     }),
@@ -152,7 +160,7 @@ const stages = [
     canBurn: ({ metadata }) => {
       const lifecycleTrait = getLifecycleTrait({ metadata });
       const evolutionTrait = getEvolutionTrait({ metadata });
-      return Number(lifecycleTrait.value) === 3 && Number(evolutionTrait.value) === 3;
+      return Number(lifecycleTrait.value) === 3 && Number(evolutionTrait?.value) === 3;
     },
     canEvolve: () => false,
     canSell: () => true,
@@ -169,6 +177,10 @@ const stages = [
         {
           trait_type: 'Wavelength',
           value: 'NEW!!!',
+        },
+        {
+          trait_type: 'Whitelist',
+          value: '3333 & 2222 & 1111',
         },
       ],
     }),

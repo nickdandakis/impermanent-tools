@@ -6,10 +6,11 @@ import DecisionsPageHeader from '../components/DecisionsPageHeader';
 import IDInput from '../components/IDInput';
 import allMetadata from '../data/metadata.json';
 import DecisionsStageSection from '../components/DecisionsStageSection';
+import classNames from '../utils/classNames';
 
 function DecisionsPage() {
   const [inputValue, setInputValue] = useState('');
-  const [activeStageIndex, setActiveStageIndex] = useState(0);
+  const [activeStageIndex, setActiveStageIndex] = useState(-1);
   const [metadataByStage, setMetadataByStage] = useState([]);
   const [hasSold, setHasSold] = useState(false);
 
@@ -17,6 +18,7 @@ function DecisionsPage() {
     const updatedID = event.target.value || '';
 
     setInputValue(updatedID);
+    setActiveStageIndex(-1);
   }, []);
 
   const handleSubmit = (event) => {
@@ -33,8 +35,8 @@ function DecisionsPage() {
 
     if (metadata) {
       setMetadataByStage([metadata]);
-      setActiveStageIndex(0);
       setHasSold(false);
+      setActiveStageIndex(0);
     }
   }
 
@@ -46,26 +48,34 @@ function DecisionsPage() {
           value={inputValue}
           onChange={handleInputChange}
         />
-        <input type="submit" />
+        <button>
+          Begin simulation
+        </button>
       </form>
-      {stages.map((stage, stageIndex) => (activeStageIndex >= stageIndex) && (
-        <DecisionsStageSection
-          key={stageIndex}
-          stageIndex={stageIndex}
-          activeStageIndex={activeStageIndex}
-          metadata={metadataByStage[stageIndex]}
-          hasSold={hasSold}
-          onNextStage={() => {
-            setActiveStageIndex(previousActiveStageIndex => previousActiveStageIndex + 1)
-          }}
-          onMetadataUpdate={({ stageIndex, updatedMetadata }) => setMetadataByStage([
-            ...metadataByStage,
-            updatedMetadata,
-          ])}
-          onSell={() => setHasSold(true)}
-        />
-      ))}
+      <div className={classNames('container', hasSold && 'has-sold')}>
+        {activeStageIndex !== -1 && stages.map((stage, stageIndex) => (activeStageIndex >= stageIndex) && (
+          <DecisionsStageSection
+            key={stageIndex}
+            stageIndex={stageIndex}
+            activeStageIndex={activeStageIndex}
+            metadata={metadataByStage[stageIndex]}
+            hasSold={hasSold}
+            onNextStage={() => {
+              setActiveStageIndex(previousActiveStageIndex => previousActiveStageIndex + 1)
+            }}
+            onMetadataUpdate={({ stageIndex, updatedMetadata }) => setMetadataByStage([
+              ...metadataByStage,
+              updatedMetadata,
+            ])}
+            onSell={() => setHasSold(true)}
+          />
+        ))}
+      </div>
       <style jsx>{`
+        .has-sold {
+          opacity: 0.5;
+          pointer-events: none;
+        }
       `}</style>
     </div>
   );

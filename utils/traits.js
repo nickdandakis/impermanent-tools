@@ -8,4 +8,5 @@ export const getAdditionalWavelengthTrait = ({ metadata }) => getTrait({ metadat
 export const getLifecycleTrait = ({ metadata }) => getTrait({ metadata, type: 'lifecycle' });
 export const getAfterlifeTrait = ({ metadata }) => getTrait({ metadata, type: 'afterlife' });
 export const getEvolutionTrait = ({ metadata }) => getTrait({ metadata, type: 'evolution' });
+export const getWhitelistTrait = ({ metadata }) => getTrait({ metadata, type: 'whitelist' });
 export const getSignatureEditionTrait = ({ metadata }) => getTrait({ metadata, type: 'signature edition' });
