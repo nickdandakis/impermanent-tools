@@ -16,24 +16,28 @@ function PageFooter() {
         <a
           href="https://opensea.io/collection/impermanent-digital"
           target="_blank"
+          rel="noreferrer"
         >
           <OpenSeaLogo />
         </a>
         <a
           href="http://twitter.com/impermanentID"
           target="_blank"
+          rel="noreferrer"
         >
           <TwitterLogo />
         </a>
         <a
           href="https://discord.gg/p4N4z9Mydk"
           target="_blank"
+          rel="noreferrer"
         >
           <DiscordLogo />
         </a>
         <a
           href="https://github.com/nickdandakis/impermanent-digital-comparison/"
           target="_blank"
+          rel="noreferrer"
         >
           <GithubLogo />
         </a>

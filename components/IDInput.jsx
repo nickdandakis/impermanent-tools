@@ -28,4 +28,6 @@ const IDInput = forwardRef(({ value, onChange }, ref) => {
   );
 });
 
+IDInput.displayName = 'IDInput';
+
 export default IDInput;

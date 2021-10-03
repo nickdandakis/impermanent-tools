@@ -33,6 +33,7 @@ function TraitsSection({ metadata, isReversed = false }) {
           <a
             href={`https://opensea.io/assets/${CRYPTO_PUNKS_CONTRACT_ID}/${traitPunk.value}`}
             target="_blank"
+            rel="noreferrer"
           >
             Punk #{traitPunk.value}
           </a>
@@ -49,6 +50,7 @@ function TraitsSection({ metadata, isReversed = false }) {
           <a
             href={`https://opensea.io/assets/${IMPERMANENT_DIGITAL_CONTRACT_ID}/${metadata.id}`}
             target="_blank"
+            rel="noreferrer"
           >
             ID #{metadata.id}
           </a>
@@ -57,6 +59,7 @@ function TraitsSection({ metadata, isReversed = false }) {
           <a
             href={`${OPENSEA_IMPERMANENT_DIGITAL_WAVELENGTH_FILTER_URL}${traitWavelength.value}`}
             target="_blank"
+            rel="noreferrer"
           >
             Wavelength: {traitWavelength.value}
           </a>
@@ -70,6 +73,7 @@ function TraitsSection({ metadata, isReversed = false }) {
           <a
             href={`${OPENSEA_IMPERMANENT_DIGITAL_LIFECYCLE_FILTER_URL}${traitLifecycle.value}`}
             target="_blank"
+            rel="noreferrer"
           >
             Lifecycle: {traitLifecycle.value}
           </a>
@@ -93,6 +97,7 @@ function TraitsSection({ metadata, isReversed = false }) {
           <a
             href={OPENSEA_IMPERMANENT_DIGITAL_SIGNATURE_FILTER_URL}
             target="_blank"
+            rel="noreferrer"
           >
             Signature Edition: {traitSignatureEdition.value}
           </a>

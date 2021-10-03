@@ -5,7 +5,7 @@ function PageHeader({ links = null }) {
   return (
     <header>
       <Link href="/">
-        <a href="/" className="logo-wrapper">
+        <a className="logo-wrapper">
           <Image src="/images/impermanent-logo.png" width="219" height="49" />
         </a>
       </Link>
@@ -13,12 +13,12 @@ function PageHeader({ links = null }) {
         {links || (
           <>
             <Link href="/compare">
-              <a href="/compare">
+              <a>
                 Compare
               </a>
             </Link>
             <Link href="/decisions">
-              <a href="/decisions">
+              <a>
                 Decisions
               </a>
             </Link>
