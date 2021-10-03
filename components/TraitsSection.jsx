@@ -9,13 +9,19 @@ import {
   getPunkTrait,
   getWavelengthTrait,
   getLifecycleTrait,
+  getAfterlifeTrait,
+  getEvolutionTrait,
+  getAdditionalWavelengthTrait,
   getSignatureEditionTrait,
 } from '../utils/traits';
 
 function TraitsSection({ metadata, isReversed = false }) {
   const traitPunk = getPunkTrait({ metadata });
   const traitWavelength = getWavelengthTrait({ metadata });
+  const traitAdditionalWavelength = getAdditionalWavelengthTrait({ metadata });
   const traitLifecycle = getLifecycleTrait({ metadata });
+  const traitEvolution = getEvolutionTrait({ metadata });
+  const traitAfterlife = getAfterlifeTrait({ metadata });
   const traitSignatureEdition = getSignatureEditionTrait({ metadata });
 
   return (
@@ -50,16 +56,31 @@ function TraitsSection({ metadata, isReversed = false }) {
             href={`${OPENSEA_IMPERMANENT_DIGITAL_WAVELENGTH_FILTER_URL}${traitWavelength.value}`}
             target="_blank"
           >
-            {traitWavelength.value}
+            Wavelength: {traitWavelength.value}
           </a>
+        )}
+        {traitAdditionalWavelength && (
+          <span>
+            Wavelength: {traitAdditionalWavelength.value}
+          </span>
         )}
         {traitLifecycle && (
           <a
             href={`${OPENSEA_IMPERMANENT_DIGITAL_LIFECYCLE_FILTER_URL}${traitLifecycle.value}`}
             target="_blank"
           >
-            L{traitLifecycle.value}
+            Lifecycle: {traitLifecycle.value}
           </a>
+        )}
+        {traitEvolution && (
+          <span>
+            Evolution: {traitEvolution.value}
+          </span>
+        )}
+        {traitAfterlife && (
+          <span>
+            Afterlife: {traitAfterlife.value}
+          </span>
         )}
         {traitSignatureEdition && (
           <a

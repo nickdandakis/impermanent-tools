@@ -8,6 +8,7 @@ import PageLayout from '../components/PageLayout';
 import TraitsSection from '../components/TraitsSection';
 import Comparator from '../components/Comparator';
 import { getPunkTrait } from '../utils/traits';
+import IDInput from '../components/IDInput';
 
 import ReactCompareImage from '../components/ReactCompareImage.tsx';
 import allMetadata from '../data/metadata.json';
@@ -108,12 +109,8 @@ function ComparePage() {
         with&nbsp;
         {isReversed ? 'CryptoPunk' : 'Impermanent Digital'}
       </h1>
-      <input
+      <IDInput
         ref={inputRef}
-        placeholder="#"
-        className="id-input"
-        type="text"
-        maxLength="5"
         value={inputValue}
         onChange={handleInputChange}
       />

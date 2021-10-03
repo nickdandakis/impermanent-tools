@@ -1,6 +1,9 @@
 module.exports = {
   images: {
-    domains: ['mint.impermanent.digital'],
+    domains: [
+      'mint.impermanent.digital',
+      'via.placeholder.com',
+    ],
   },
   async redirects() {
     return [

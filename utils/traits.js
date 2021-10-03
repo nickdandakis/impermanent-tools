@@ -4,5 +4,8 @@ export const getTrait = ({ metadata, type }) => metadata
 
 export const getPunkTrait = ({ metadata }) => getTrait({ metadata, type: 'punk id' });
 export const getWavelengthTrait = ({ metadata }) => getTrait({ metadata, type: 'wavelength' });
+export const getAdditionalWavelengthTrait = ({ metadata }) => getTrait({ metadata, type: 'additional wavelength' });
 export const getLifecycleTrait = ({ metadata }) => getTrait({ metadata, type: 'lifecycle' });
+export const getAfterlifeTrait = ({ metadata }) => getTrait({ metadata, type: 'afterlife' });
+export const getEvolutionTrait = ({ metadata }) => getTrait({ metadata, type: 'evolution' });
 export const getSignatureEditionTrait = ({ metadata }) => getTrait({ metadata, type: 'signature edition' });
