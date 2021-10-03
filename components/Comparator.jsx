@@ -17,7 +17,7 @@ function Comparator({ metadata }) {
     <div className="compare">
       <div className="compare-container">
         <div className="skeleton" />
-        {traitPunk && (
+        {traitPunk && metadata && (
           <ReactCompareImage
             leftImage={`/images/punk-${traitPunk.value}.png`}
             leftImageClassName="punk-image"

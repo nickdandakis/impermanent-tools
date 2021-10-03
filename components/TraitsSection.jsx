@@ -28,7 +28,7 @@ function TraitsSection({ metadata, isReversed = false }) {
           >
             Punk #{traitPunk.value}
           </a>
-        ) : (
+        ) : metadata && (
           <span>
             No&nbsp;
             {isReversed ? 'Impermanent Digital' : 'CryptoPunk'}

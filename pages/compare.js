@@ -117,12 +117,8 @@ function ComparePage() {
         value={inputValue}
         onChange={handleInputChange}
       />
-      {isValidID && (
-        <>
-          <Comparator metadata={metadata} />
-          <TraitsSection metadata={metadata} isReversed={isReversed} />
-        </>
-      )}
+      <Comparator metadata={metadata} />
+      <TraitsSection metadata={metadata} isReversed={isReversed} />
       <style jsx>{`
         .compare-page {
           max-width: 500px;
