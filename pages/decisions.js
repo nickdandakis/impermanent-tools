@@ -49,7 +49,7 @@ function DecisionsPage() {
           onChange={handleInputChange}
         />
         <button>
-          Begin simulation
+          Simulate
         </button>
       </form>
       <div className={classNames('container', hasSold && 'has-sold')}>
