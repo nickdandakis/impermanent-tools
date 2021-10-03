@@ -7,7 +7,7 @@ const require = createRequire(import.meta.url);
 const BASE_METADATA_API_URL = 'https://mint.impermanent.digital/api/metadata';
 const MIN_IMPERMANENT_COUNT = 0;
 const MAX_IMPERMANENT_COUNT = 4444;
-const SHOULD_SCRAPE_IMPERMANENT_DIGITAL_API = false;
+const SHOULD_SCRAPE_IMPERMANENT_DIGITAL_API = true;
 const SHOULD_GENERATE_PUNK_MAP = true;
 const SHOULD_UPDATE_METADATA_META = true;
 
@@ -30,7 +30,10 @@ function sleep(duration) {
       const metadata = await fetch(`${BASE_METADATA_API_URL}/${i}`).then((response) => response.json());
 
       console.log(`Scraped impermanent digital ${i}`);
-      allMetadata.push(metadata);
+      allMetadata.push({
+        id: i,
+        ...metadata,
+      });
 
       await sleep(333);
     }

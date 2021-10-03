@@ -1,10 +1,14 @@
-// import App from 'next/app'
 import Head from 'next/head';
 
 import '../styles/typography.css';
 import '../styles/base.css';
 
-function MyApp({ Component, pageProps }) {
+function Application({ Component, pageProps }) {
+  // persistent layouts from:
+  // https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
+  // eslint-disable-next-line react/prop-types
+  const getLayout = Component.getLayout || ((page) => page);
+
   return (
     <>
       <Head>
@@ -22,21 +26,9 @@ function MyApp({ Component, pageProps }) {
           key="og:image"
         />
       </Head>
-      <Component {...pageProps} />
+      {getLayout(<Component {...pageProps} />)}
     </>
   );
 }
 
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// MyApp.getInitialProps = async (appContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
-//
-//   return { ...appProps }
-// }
-
-export default MyApp;
+export default Application;
