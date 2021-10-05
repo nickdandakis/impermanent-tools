@@ -41,6 +41,7 @@ function DecisionsPage() {
 
     setInputValue(updatedID);
     setActiveStageIndex(-1);
+    setAnsweredStageIndex(-1);
   };
 
   const handleSubmit = (event) => {
