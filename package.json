@@ -23,6 +23,7 @@
   "devDependencies": {
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
+    "eslint-config-prettier": "^8.3.0",
     "file-type": "^16.5.3",
     "husky": "^7.0.2",
     "lint-staged": "^11.2.0",
@@ -31,7 +32,7 @@
     "sharp": "^0.29.1"
   },
   "lint-staged": {
-    "*.{jsx,js}": "next lint --cache --fix",
+    "*.{jsx,js}": "eslint --fix",
     "*.{js,jsx,css,md}": "prettier --write"
   },
   "engines": {
