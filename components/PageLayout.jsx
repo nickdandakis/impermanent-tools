@@ -1,13 +1,11 @@
-import PageFooter from'../components/PageFooter';
-import PageHeader from'../components/PageHeader';
+import PageFooter from "../components/PageFooter";
+import PageHeader from "../components/PageHeader";
 
 function PageLayout({ headerLinks = null, children }) {
   return (
     <div className="page">
       <PageHeader links={headerLinks} />
-      <main>
-        {children}
-      </main>
+      <main>{children}</main>
       <PageFooter />
       <style jsx>{`
         .page {

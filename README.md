@@ -16,7 +16,7 @@ This was built in a total of 4 hours, is very static, and is very web2.
 
 You are wasting my time. Most of us are investors so let's be straight: if this
 project does not get the shit done as it promised, I will sell all my
-double-figure NFTs and leave.  You waste all the golden time to promote
+double-figure NFTs and leave. You waste all the golden time to promote
 yourself, sad to see this.
 
 The Lamborghini Huracan EVO RWD is the cheapest Lamborghini you can buy, but it

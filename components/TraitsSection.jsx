@@ -4,7 +4,7 @@ import {
   OPENSEA_IMPERMANENT_DIGITAL_LIFECYCLE_FILTER_URL,
   OPENSEA_IMPERMANENT_DIGITAL_WAVELENGTH_FILTER_URL,
   OPENSEA_IMPERMANENT_DIGITAL_SIGNATURE_FILTER_URL,
-} from '../data/constants';
+} from "../data/constants";
 import {
   getPunkTrait,
   getWavelengthTrait,
@@ -14,7 +14,7 @@ import {
   getAdditionalWavelengthTrait,
   getSignatureEditionTrait,
   getWhitelistTrait,
-} from '../utils/traits';
+} from "../utils/traits";
 
 function TraitsSection({ metadata, isReversed = false }) {
   const traitPunk = getPunkTrait({ metadata });
@@ -37,12 +37,14 @@ function TraitsSection({ metadata, isReversed = false }) {
           >
             Punk #{traitPunk.value}
           </a>
-        ) : metadata && (
-          <span>
-            No&nbsp;
-            {isReversed ? 'Impermanent Digital' : 'CryptoPunk'}
-            &nbsp;available
-          </span>
+        ) : (
+          metadata && (
+            <span>
+              No&nbsp;
+              {isReversed ? "Impermanent Digital" : "CryptoPunk"}
+              &nbsp;available
+            </span>
+          )
         )}
       </div>
       <div className="column">
@@ -65,9 +67,7 @@ function TraitsSection({ metadata, isReversed = false }) {
           </a>
         )}
         {traitAdditionalWavelength && (
-          <span>
-            Wavelength: {traitAdditionalWavelength.value}
-          </span>
+          <span>Wavelength: {traitAdditionalWavelength.value}</span>
         )}
         {traitLifecycle && (
           <a
@@ -78,21 +78,9 @@ function TraitsSection({ metadata, isReversed = false }) {
             Lifecycle: {traitLifecycle.value}
           </a>
         )}
-        {traitEvolution && (
-          <span>
-            Evolution: {traitEvolution.value}
-          </span>
-        )}
-        {traitAfterlife && (
-          <span>
-            Afterlife: {traitAfterlife.value}
-          </span>
-        )}
-        {traitWhitelist && (
-          <span>
-            Whitelist: {traitWhitelist.value}
-          </span>
-        )}
+        {traitEvolution && <span>Evolution: {traitEvolution.value}</span>}
+        {traitAfterlife && <span>Afterlife: {traitAfterlife.value}</span>}
+        {traitWhitelist && <span>Whitelist: {traitWhitelist.value}</span>}
         {traitSignatureEdition && (
           <a
             href={OPENSEA_IMPERMANENT_DIGITAL_SIGNATURE_FILTER_URL}

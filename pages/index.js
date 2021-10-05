@@ -1,4 +1,4 @@
-import PageLayout from '../components/PageLayout';
+import PageLayout from "../components/PageLayout";
 
 function IndexPage() {
   return (
@@ -12,11 +12,6 @@ function IndexPage() {
   );
 }
 
-
-IndexPage.getLayout = (page) => (
-  <PageLayout>
-    {page}
-  </PageLayout>
-);
+IndexPage.getLayout = (page) => <PageLayout>{page}</PageLayout>;
 
 export default IndexPage;

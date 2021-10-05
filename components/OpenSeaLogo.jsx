@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 
 function OpenSeaLogo(props) {
   return (
@@ -23,7 +23,7 @@ function OpenSeaLogo(props) {
         fill="#fff"
       />
     </svg>
-  )
+  );
 }
 
 export default OpenSeaLogo;

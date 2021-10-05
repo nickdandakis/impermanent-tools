@@ -1,23 +1,20 @@
 module.exports = {
   images: {
-    domains: [
-      'mint.impermanent.digital',
-      'via.placeholder.com',
-    ],
+    domains: ["mint.impermanent.digital", "via.placeholder.com"],
   },
   async redirects() {
     return [
       {
-        source: '/',
+        source: "/",
         has: [
           {
-            type: 'query',
-            key: 'id',
+            type: "query",
+            key: "id",
           },
         ],
         permanent: true,
-        destination: '/compare',
+        destination: "/compare",
       },
     ];
-  }
-}
+  },
+};

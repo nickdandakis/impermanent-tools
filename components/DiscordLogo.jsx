@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 
 function DiscordLogo(props) {
   return (
@@ -15,7 +15,7 @@ function DiscordLogo(props) {
         fill="#5865F2"
       />
     </svg>
-  )
+  );
 }
 
 export default DiscordLogo;

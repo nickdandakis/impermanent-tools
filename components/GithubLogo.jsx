@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 
 function GithubLogo(props) {
   return (
@@ -15,7 +15,7 @@ function GithubLogo(props) {
         fill="#161614"
       />
     </svg>
-  )
+  );
 }
 
 export default GithubLogo;

@@ -1,10 +1,10 @@
-import { useMemo } from 'react';
-import Image from 'next/image';
+import { useMemo } from "react";
+import Image from "next/image";
 
-import ReactCompareImage from '../components/ReactCompareImage.tsx';
-import getRandomColor from '../utils/getRandomColor';
-import getRandomInt from '../utils/getRandomInt';
-import { getPunkTrait } from '../utils/traits';
+import ReactCompareImage from "../components/ReactCompareImage.tsx";
+import getRandomColor from "../utils/getRandomColor";
+import getRandomInt from "../utils/getRandomInt";
+import { getPunkTrait } from "../utils/traits";
 
 function Comparator({ metadata }) {
   const traitPunk = getPunkTrait({ metadata });
@@ -23,17 +23,11 @@ function Comparator({ metadata }) {
             leftImageClassName="punk-image"
             rightImage={metadata.image}
             rightImageClassName="impermanent-image"
-            skeleton={
-              <div className="skeleton" />
-            }
+            skeleton={<div className="skeleton" />}
           />
         )}
         {!traitPunk && metadata && (
-          <Image
-            src={metadata.image}
-            width={500}
-            height={500}
-          />
+          <Image src={metadata.image} width={500} height={500} />
         )}
       </div>
       <style jsx>{`
@@ -58,10 +52,14 @@ function Comparator({ metadata }) {
           height: 0;
           padding-top: 100%;
           position: absolute;
-          overflow: auto!important;
+          overflow: auto !important;
           top: 0;
           left: 0;
-          background: linear-gradient(${randomDegrees}deg, ${randomColorA}, ${randomColorB});
+          background: linear-gradient(
+            ${randomDegrees}deg,
+            ${randomColorA},
+            ${randomColorB}
+          );
           opacity: 0.5;
         }
       `}</style>

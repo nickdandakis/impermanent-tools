@@ -1,7 +1,7 @@
-import Head from 'next/head';
+import Head from "next/head";
 
-import '../styles/typography.css';
-import '../styles/base.css';
+import "../styles/typography.css";
+import "../styles/base.css";
 
 function Application({ Component, pageProps }) {
   // persistent layouts from:
@@ -12,9 +12,7 @@ function Application({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title key="title">
-          Impermanent Tools
-        </title>
+        <title key="title">Impermanent Tools</title>
         <meta
           name="description"
           content="Compare CryptoPunk with Impermanent Digital, and vice-versa"

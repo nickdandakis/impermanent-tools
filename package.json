@@ -1,5 +1,5 @@
 {
-  "name": "impermanent-digital-comparison",
+  "name": "impermanent-tools",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
@@ -11,8 +11,8 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write ."
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Nick Dandakis",
+  "license": "MIT",
   "dependencies": {
     "date-fns": "^2.24.0",
     "next": "^11.1.2",

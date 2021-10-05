@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef } from "react";
 
 const IDInput = forwardRef(({ value, onChange }, ref) => {
   return (
@@ -28,6 +28,6 @@ const IDInput = forwardRef(({ value, onChange }, ref) => {
   );
 });
 
-IDInput.displayName = 'IDInput';
+IDInput.displayName = "IDInput";
 
 export default IDInput;

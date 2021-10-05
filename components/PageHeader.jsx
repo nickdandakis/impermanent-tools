@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
 function PageHeader({ links = null }) {
   return (
@@ -13,14 +13,10 @@ function PageHeader({ links = null }) {
         {links || (
           <>
             <Link href="/compare">
-              <a>
-                Compare
-              </a>
+              <a>Compare</a>
             </Link>
             <Link href="/decisions">
-              <a>
-                Decisions
-              </a>
+              <a>Decisions</a>
             </Link>
           </>
         )}
@@ -35,7 +31,7 @@ function PageHeader({ links = null }) {
           width: 100%;
         }
 
-        .logo-wrapper{
+        .logo-wrapper {
           display: block;
           max-width: 200px;
         }
@@ -43,7 +39,7 @@ function PageHeader({ links = null }) {
         .right > * {
           padding: 0 10px;
           font-weight: bold;
-          font-family: 'Terminal Grotesque';
+          font-family: "Terminal Grotesque";
         }
 
         @media (max-width: 500px) {

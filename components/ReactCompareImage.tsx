@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 
 interface IProps {
-  aspectRatio?: 'taller' | 'wider';
+  aspectRatio?: "taller" | "wider";
   handle?: React.ReactNode;
   handleSize?: number;
   hover?: boolean;
@@ -24,27 +24,27 @@ interface IProps {
 }
 
 const defaultProps = {
-  aspectRatio: 'taller',
+  aspectRatio: "taller",
   handle: null,
   handleSize: 40,
   hover: false,
-  leftImageAlt: '',
+  leftImageAlt: "",
   leftImageCss: {},
   leftImageLabel: null,
-  leftImageClassName: '',
+  leftImageClassName: "",
   onSliderPositionChange: () => {},
-  rightImageAlt: '',
+  rightImageAlt: "",
   rightImageCss: {},
   rightImageLabel: null,
-  rightImageClassName: '',
+  rightImageClassName: "",
   skeleton: null,
-  sliderLineColor: '#ffffff',
+  sliderLineColor: "#ffffff",
   sliderLineWidth: 2,
   sliderPositionPercentage: 0.5,
   vertical: false,
 };
 
-const ReactCompareImage: React.FC<IProps> = props => {
+const ReactCompareImage: React.FC<IProps> = (props) => {
   const {
     aspectRatio,
     handle,
@@ -72,7 +72,7 @@ const ReactCompareImage: React.FC<IProps> = props => {
 
   // 0 to 1
   const [sliderPosition, setSliderPosition] = useState<number>(
-    sliderPositionPercentage,
+    sliderPositionPercentage
   );
   const [containerWidth, setContainerWidth] = useState<number>(0);
   const [containerHeight, setContainerHeight] = useState<number>(0);
@@ -123,7 +123,7 @@ const ReactCompareImage: React.FC<IProps> = props => {
   const allImagesLoaded = rightImgLoaded && leftImgLoaded;
 
   useEffect(() => {
-    const handleSliding = event => {
+    const handleSliding = (event) => {
       const e = event || window.event;
 
       // Calc cursor position from the:
@@ -168,25 +168,25 @@ const ReactCompareImage: React.FC<IProps> = props => {
       }
     };
 
-    const startSliding = e => {
+    const startSliding = (e) => {
       setIsSliding(true);
 
       // Prevent default behavior other than mobile scrolling
-      if (!('touches' in e)) {
+      if (!("touches" in e)) {
         e.preventDefault();
       }
 
       // Slide the image even if you just click or tap (not drag)
       handleSliding(e);
 
-      window.addEventListener('mousemove', handleSliding); // 07
-      window.addEventListener('touchmove', handleSliding); // 08
+      window.addEventListener("mousemove", handleSliding); // 07
+      window.addEventListener("touchmove", handleSliding); // 08
     };
 
     const finishSliding = () => {
       setIsSliding(false);
-      window.removeEventListener('mousemove', handleSliding);
-      window.removeEventListener('touchmove', handleSliding);
+      window.removeEventListener("mousemove", handleSliding);
+      window.removeEventListener("touchmove", handleSliding);
     };
 
     const containerElement = containerRef.current;
@@ -195,16 +195,16 @@ const ReactCompareImage: React.FC<IProps> = props => {
       // it's necessary to reset event handlers each time the canvasWidth changes
 
       // for mobile
-      containerElement.addEventListener('touchstart', startSliding); // 01
-      window.addEventListener('touchend', finishSliding); // 02
+      containerElement.addEventListener("touchstart", startSliding); // 01
+      window.addEventListener("touchend", finishSliding); // 02
 
       // for desktop
       if (hover) {
-        containerElement.addEventListener('mousemove', handleSliding); // 03
-        containerElement.addEventListener('mouseleave', finishSliding); // 04
+        containerElement.addEventListener("mousemove", handleSliding); // 03
+        containerElement.addEventListener("mouseleave", finishSliding); // 04
       } else {
-        containerElement.addEventListener('mousedown', startSliding); // 05
-        window.addEventListener('mouseup', finishSliding); // 06
+        containerElement.addEventListener("mousedown", startSliding); // 05
+        window.addEventListener("mouseup", finishSliding); // 06
       }
 
       // calc and set the container's size
@@ -215,7 +215,7 @@ const ReactCompareImage: React.FC<IProps> = props => {
         rightImageRef.current.naturalWidth;
 
       const idealWidthHeightRatio =
-        aspectRatio === 'taller'
+        aspectRatio === "taller"
           ? Math.max(leftImageWidthHeightRatio, rightImageWidthHeightRatio)
           : Math.min(leftImageWidthHeightRatio, rightImageWidthHeightRatio);
 
@@ -226,14 +226,14 @@ const ReactCompareImage: React.FC<IProps> = props => {
 
     return () => {
       // cleanup all event resteners
-      containerElement.removeEventListener('touchstart', startSliding); // 01
-      window.removeEventListener('touchend', finishSliding); // 02
-      containerElement.removeEventListener('mousemove', handleSliding); // 03
-      containerElement.removeEventListener('mouseleave', finishSliding); // 04
-      containerElement.removeEventListener('mousedown', startSliding); // 05
-      window.removeEventListener('mouseup', finishSliding); // 06
-      window.removeEventListener('mousemove', handleSliding); // 07
-      window.removeEventListener('touchmove', handleSliding); // 08
+      containerElement.removeEventListener("touchstart", startSliding); // 01
+      window.removeEventListener("touchend", finishSliding); // 02
+      containerElement.removeEventListener("mousemove", handleSliding); // 03
+      containerElement.removeEventListener("mouseleave", finishSliding); // 04
+      containerElement.removeEventListener("mousedown", startSliding); // 05
+      window.removeEventListener("mouseup", finishSliding); // 06
+      window.removeEventListener("mousemove", handleSliding); // 07
+      window.removeEventListener("touchmove", handleSliding); // 08
     };
     // eslint-disable-next-line
   }, [
@@ -249,137 +249,137 @@ const ReactCompareImage: React.FC<IProps> = props => {
 
   const styles: { [key: string]: React.CSSProperties } = {
     container: {
-      boxSizing: 'border-box',
-      position: 'relative',
-      width: '100%',
+      boxSizing: "border-box",
+      position: "relative",
+      width: "100%",
       height: `${containerHeight}px`,
-      overflow: 'hidden',
+      overflow: "hidden",
     },
     rightImage: {
       clip: horizontal
         ? `rect(auto, auto, auto, ${containerWidth * sliderPosition}px)`
         : `rect(${containerHeight * sliderPosition}px, auto, auto, auto)`,
-      display: 'block',
-      height: '100%',
-      objectFit: 'cover',
-      position: 'absolute',
-      width: '100%',
+      display: "block",
+      height: "100%",
+      objectFit: "cover",
+      position: "absolute",
+      width: "100%",
       ...rightImageCss,
     },
     leftImage: {
       clip: horizontal
         ? `rect(auto, ${containerWidth * sliderPosition}px, auto, auto)`
         : `rect(auto, auto, ${containerHeight * sliderPosition}px, auto)`,
-      display: 'block',
-      height: '100%',
-      objectFit: 'cover',
-      position: 'absolute',
-      width: '100%',
+      display: "block",
+      height: "100%",
+      objectFit: "cover",
+      position: "absolute",
+      width: "100%",
       ...leftImageCss,
     },
     slider: {
-      alignItems: 'center',
+      alignItems: "center",
       cursor:
-        (!hover && horizontal && 'ew-resize') ||
-        (!hover && !horizontal && 'ns-resize'),
-      display: 'flex',
-      flexDirection: horizontal ? 'column' : 'row',
-      height: horizontal ? '100%' : `${handleSize}px`,
-      justifyContent: 'center',
+        (!hover && horizontal && "ew-resize") ||
+        (!hover && !horizontal && "ns-resize"),
+      display: "flex",
+      flexDirection: horizontal ? "column" : "row",
+      height: horizontal ? "100%" : `${handleSize}px`,
+      justifyContent: "center",
       left: horizontal
         ? `${containerWidth * sliderPosition - handleSize / 2}px`
         : 0,
-      position: 'absolute',
+      position: "absolute",
       top: horizontal
         ? 0
         : `${containerHeight * sliderPosition - handleSize / 2}px`,
-      width: horizontal ? `${handleSize}px` : '100%',
+      width: horizontal ? `${handleSize}px` : "100%",
     },
     line: {
       background: sliderLineColor,
       boxShadow:
-        '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)',
-      flex: '0 1 auto',
-      height: horizontal ? '100%' : `${sliderLineWidth}px`,
-      width: horizontal ? `${sliderLineWidth}px` : '100%',
+        "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+      flex: "0 1 auto",
+      height: horizontal ? "100%" : `${sliderLineWidth}px`,
+      width: horizontal ? `${sliderLineWidth}px` : "100%",
     },
     handleCustom: {
-      alignItems: 'center',
-      boxSizing: 'border-box',
-      display: 'flex',
-      flex: '1 0 auto',
-      height: 'auto',
-      justifyContent: 'center',
-      width: 'auto',
+      alignItems: "center",
+      boxSizing: "border-box",
+      display: "flex",
+      flex: "1 0 auto",
+      height: "auto",
+      justifyContent: "center",
+      width: "auto",
     },
     handleDefault: {
-      alignItems: 'center',
+      alignItems: "center",
       border: `${sliderLineWidth}px solid ${sliderLineColor}`,
-      borderRadius: '100%',
+      borderRadius: "100%",
       boxShadow:
-        '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)',
-      boxSizing: 'border-box',
-      display: 'flex',
-      flex: '1 0 auto',
+        "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12)",
+      boxSizing: "border-box",
+      display: "flex",
+      flex: "1 0 auto",
       height: `${handleSize}px`,
-      justifyContent: 'center',
+      justifyContent: "center",
       width: `${handleSize}px`,
-      transform: horizontal ? 'none' : 'rotate(90deg)',
+      transform: horizontal ? "none" : "rotate(90deg)",
     },
     leftArrow: {
       border: `inset ${handleSize * 0.15}px rgba(0,0,0,0)`,
       borderRight: `${handleSize * 0.15}px solid ${sliderLineColor}`,
-      height: '0px',
+      height: "0px",
       marginLeft: `-${handleSize * 0.25}px`, // for IE11
       marginRight: `${handleSize * 0.25}px`,
-      width: '0px',
+      width: "0px",
     },
     rightArrow: {
       border: `inset ${handleSize * 0.15}px rgba(0,0,0,0)`,
       borderLeft: `${handleSize * 0.15}px solid ${sliderLineColor}`,
-      height: '0px',
+      height: "0px",
       marginRight: `-${handleSize * 0.25}px`, // for IE11
-      width: '0px',
+      width: "0px",
     },
     leftLabel: {
-      background: 'rgba(0, 0, 0, 0.5)',
-      color: 'white',
-      left: horizontal ? '5%' : '50%',
+      background: "rgba(0, 0, 0, 0.5)",
+      color: "white",
+      left: horizontal ? "5%" : "50%",
       opacity: isSliding ? 0 : 1,
-      padding: '10px 20px',
-      position: 'absolute',
-      top: horizontal ? '50%' : '3%',
-      transform: horizontal ? 'translate(0,-50%)' : 'translate(-50%, 0)',
-      transition: 'opacity 0.1s ease-out',
+      padding: "10px 20px",
+      position: "absolute",
+      top: horizontal ? "50%" : "3%",
+      transform: horizontal ? "translate(0,-50%)" : "translate(-50%, 0)",
+      transition: "opacity 0.1s ease-out",
     },
     rightLabel: {
-      background: 'rgba(0, 0, 0, 0.5)',
-      color: 'white',
+      background: "rgba(0, 0, 0, 0.5)",
+      color: "white",
       opacity: isSliding ? 0 : 1,
-      padding: '10px 20px',
-      position: 'absolute',
-      left: horizontal ? null : '50%',
-      right: horizontal ? '5%' : null,
-      top: horizontal ? '50%' : null,
-      bottom: horizontal ? null : '3%',
-      transform: horizontal ? 'translate(0,-50%)' : 'translate(-50%, 0)',
-      transition: 'opacity 0.1s ease-out',
+      padding: "10px 20px",
+      position: "absolute",
+      left: horizontal ? null : "50%",
+      right: horizontal ? "5%" : null,
+      top: horizontal ? "50%" : null,
+      bottom: horizontal ? null : "3%",
+      transform: horizontal ? "translate(0,-50%)" : "translate(-50%, 0)",
+      transition: "opacity 0.1s ease-out",
     },
     leftLabelContainer: {
       clip: horizontal
         ? `rect(auto, ${containerWidth * sliderPosition}px, auto, auto)`
         : `rect(auto, auto, ${containerHeight * sliderPosition}px, auto)`,
-      height: '100%',
-      position: 'absolute',
-      width: '100%',
+      height: "100%",
+      position: "absolute",
+      width: "100%",
     },
     rightLabelContainer: {
       clip: horizontal
         ? `rect(auto, auto, auto, ${containerWidth * sliderPosition}px)`
         : `rect(${containerHeight * sliderPosition}px, auto, auto, auto)`,
-      height: '100%',
-      position: 'absolute',
-      width: '100%',
+      height: "100%",
+      position: "absolute",
+      width: "100%",
     },
   };
 
@@ -392,7 +392,7 @@ const ReactCompareImage: React.FC<IProps> = props => {
       <div
         style={{
           ...styles.container,
-          display: allImagesLoaded ? 'block' : 'none',
+          display: allImagesLoaded ? "block" : "none",
         }}
         ref={containerRef}
         data-testid="container"

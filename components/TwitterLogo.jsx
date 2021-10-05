@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 
 function TwitterLogo(props) {
   return (
@@ -15,7 +15,7 @@ function TwitterLogo(props) {
         fill="#55acee"
       />
     </svg>
-  )
+  );
 }
 
 export default TwitterLogo;

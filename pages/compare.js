@@ -1,46 +1,39 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
+import { useState, useEffect, useRef, useCallback } from "react";
+import { useRouter } from "next/router";
+import Image from "next/image";
 
-import PageHeader from '../components/PageHeader';
-import PageFooter from '../components/PageFooter';
-import PageLayout from '../components/PageLayout';
-import TraitsSection from '../components/TraitsSection';
-import Comparator from '../components/Comparator';
-import { getPunkTrait } from '../utils/traits';
-import IDInput from '../components/IDInput';
+import PageHeader from "../components/PageHeader";
+import PageFooter from "../components/PageFooter";
+import PageLayout from "../components/PageLayout";
+import TraitsSection from "../components/TraitsSection";
+import Comparator from "../components/Comparator";
+import { getPunkTrait } from "../utils/traits";
+import IDInput from "../components/IDInput";
 
-import ReactCompareImage from '../components/ReactCompareImage.tsx';
-import allMetadata from '../data/metadata.json';
-import punkMap from '../data/punkMap.json';
-import useDebouncedCallback from '../hooks/useDebouncedCallback';
+import ReactCompareImage from "../components/ReactCompareImage.tsx";
+import allMetadata from "../data/metadata.json";
+import punkMap from "../data/punkMap.json";
+import useDebouncedCallback from "../hooks/useDebouncedCallback";
 
 function ComparePage() {
   const router = useRouter();
-  const {
-    id: activeID,
-    isReversed: unparsedIsReversed,
-  } = router.query;
-  const isReversed = (unparsedIsReversed === 'true');
+  const { id: activeID, isReversed: unparsedIsReversed } = router.query;
+  const isReversed = unparsedIsReversed === "true";
 
   const inputRef = useRef();
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
 
   const castedID = Number(activeID);
   const hasID = activeID?.length !== 0;
-  const isValidID = (
-    isReversed
-    ? !isNaN(castedID) && (castedID < 10000)
-    : !isNaN(castedID) && (castedID < 4444)
-  );
+  const isValidID = isReversed
+    ? !isNaN(castedID) && castedID < 10000
+    : !isNaN(castedID) && castedID < 4444;
 
-  const metadata = (
-    isValidID
+  const metadata = isValidID
     ? isReversed
-      ? (allMetadata[Number(punkMap[activeID])])
-      : (allMetadata[castedID])
-    : null
-  );
+      ? allMetadata[Number(punkMap[activeID])]
+      : allMetadata[castedID]
+    : null;
   const attributePunk = getPunkTrait({ metadata });
 
   useEffect(() => {
@@ -51,45 +44,50 @@ function ComparePage() {
     inputRef.current.focus();
   }, [inputRef]);
 
-  const updateQueryID = useDebouncedCallback((updatedID) => {
-    router.replace({
-      pathname: '/compare',
-      query: {
-        ...router.query,
-        id: updatedID,
-      }
-    });
-  }, 333, [router]);
+  const updateQueryID = useDebouncedCallback(
+    (updatedID) => {
+      router.replace({
+        pathname: "/compare",
+        query: {
+          ...router.query,
+          id: updatedID,
+        },
+      });
+    },
+    333,
+    [router]
+  );
 
-  const handleInputChange = useCallback((event) => {
-    const updatedID = event.target.value || '';
+  const handleInputChange = useCallback(
+    (event) => {
+      const updatedID = event.target.value || "";
 
-    updateQueryID(updatedID);
-    setInputValue(updatedID);
-  }, [router]);
+      updateQueryID(updatedID);
+      setInputValue(updatedID);
+    },
+    [router]
+  );
 
   const handleReverse = (event) => {
     event.preventDefault();
 
-    const updatedIsReversed = !(router.query.isReversed === 'true');
+    const updatedIsReversed = !(router.query.isReversed === "true");
 
-    const updatedID = (
-      updatedIsReversed
+    const updatedID = updatedIsReversed
       ? attributePunk?.value
-      : punkMap[attributePunk?.value]
-    );
+      : punkMap[attributePunk?.value];
 
     router.replace({
-      pathname: '/compare',
+      pathname: "/compare",
       query: {
         ...router.query,
         isReversed: updatedIsReversed,
         id: updatedID,
-      }
+      },
     });
 
     setInputValue(updatedID);
-  }
+  };
 
   return (
     <div className="compare-page">
@@ -99,21 +97,16 @@ function ComparePage() {
         className="reverse-button"
         key="reverse-button"
       >
-        🔄
-        Reverse search
+        🔄 Reverse search
       </a>
       <h1>
         Compare&nbsp;
-        {isReversed ? 'Impermanent Digital' : 'CryptoPunk'}
+        {isReversed ? "Impermanent Digital" : "CryptoPunk"}
         {`\n`}
         with&nbsp;
-        {isReversed ? 'CryptoPunk' : 'Impermanent Digital'}
+        {isReversed ? "CryptoPunk" : "Impermanent Digital"}
       </h1>
-      <IDInput
-        ref={inputRef}
-        value={inputValue}
-        onChange={handleInputChange}
-      />
+      <IDInput ref={inputRef} value={inputValue} onChange={handleInputChange} />
       <Comparator metadata={metadata} />
       <TraitsSection metadata={metadata} isReversed={isReversed} />
       <style jsx>{`
@@ -164,11 +157,7 @@ function ComparePage() {
 }
 
 ComparePage.getLayout = (page) => {
-  return (
-    <PageLayout>
-      {page}
-    </PageLayout>
-  );
+  return <PageLayout>{page}</PageLayout>;
 };
 
 export default ComparePage;

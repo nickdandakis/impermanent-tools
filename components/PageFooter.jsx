@@ -1,8 +1,8 @@
-import DiscordLogo from'../components/DiscordLogo';
-import TwitterLogo from'../components/TwitterLogo';
-import GithubLogo from'../components/GithubLogo';
-import OpenSeaLogo from'../components/OpenSeaLogo';
-import metadataMeta from '../data/metadata-meta.json';
+import DiscordLogo from "../components/DiscordLogo";
+import TwitterLogo from "../components/TwitterLogo";
+import GithubLogo from "../components/GithubLogo";
+import OpenSeaLogo from "../components/OpenSeaLogo";
+import metadataMeta from "../data/metadata-meta.json";
 
 function PageFooter() {
   return (
