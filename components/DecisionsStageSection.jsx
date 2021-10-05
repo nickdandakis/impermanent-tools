@@ -3,22 +3,13 @@ import Image from "next/image";
 
 import stages from "../data/stages";
 import TraitsSection from "../components/TraitsSection";
-import DecisionsActions from "../components/DecisionsActions";
 import {
   getAfterlifeTrait,
   getEvolutionTrait,
   getLifecycleTrait,
 } from "../utils/traits";
 
-function DecisionsStageSection({
-  stageIndex,
-  metadata,
-  activeStageIndex,
-  hasSold,
-  onNextStage,
-  onMetadataUpdate,
-  onSell,
-}) {
+function DecisionsStageSection({ stageIndex, metadata }) {
   const stage = stages[stageIndex];
   const afterlifeTrait = getAfterlifeTrait({ metadata });
   const evolutionTrait = getEvolutionTrait({ metadata });
@@ -28,12 +19,12 @@ function DecisionsStageSection({
     return null;
   }
 
-  const isStageDisabled = activeStageIndex > stageIndex || hasSold;
-
   return (
     <div className="stage-section">
-      <h3>{stage.heading}</h3>
-      <p>{stage?.body({ metadata })}</p>
+      <header>
+        <h3>{stage.heading}</h3>
+        <p>{stage?.body({ metadata })}</p>
+      </header>
       <Image
         src={
           afterlifeTrait
@@ -46,15 +37,11 @@ function DecisionsStageSection({
         height={500}
       />
       <TraitsSection metadata={metadata} />
-      <DecisionsActions
-        stage={stage}
-        isStageDisabled={isStageDisabled}
-        metadata={metadata}
-        onNextStage={onNextStage}
-        onMetadataUpdate={onMetadataUpdate}
-        onSell={onSell}
-      />
       <style jsx>{`
+        header {
+          text-align: left;
+        }
+
         .stage-section {
           max-width: 500px;
           margin: 0 auto;

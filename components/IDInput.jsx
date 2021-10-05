@@ -17,7 +17,6 @@ const IDInput = forwardRef(({ value, onChange }, ref) => {
           font-size: 48px;
           width: 100%;
           text-align: center;
-          margin-bottom: 20px;
           color: gray;
         }
         .id-input:focus {

@@ -1,8 +1,13 @@
+import { ButtonNext } from "pure-react-carousel";
+
 function DecisionsActions({
   stage,
   metadata,
   isStageDisabled,
+  isPreviousDisabled,
+  isNextDisabled,
   onNextStage,
+  onPreviousStage,
   onMetadataUpdate,
   onSell,
 }) {
@@ -44,30 +49,40 @@ function DecisionsActions({
 
   return (
     <div className="actions">
-      <button
-        disabled={!stage.canHold({ metadata }) || isStageDisabled}
-        onClick={handleHold}
-      >
-        Hold
-      </button>
-      <button
-        disabled={!stage.canBurn({ metadata }) || isStageDisabled}
-        onClick={handleBurn}
-      >
-        Burn
-      </button>
-      <button
-        disabled={!stage.canEvolve({ metadata }) || isStageDisabled}
-        onClick={handleEvolve}
-      >
-        Evolve
-      </button>
-      <button
-        disabled={!stage.canSell({ metadata }) || isStageDisabled}
-        onClick={handleSell}
-      >
-        Sell
-      </button>
+      <div>
+        <button
+          disabled={!stage.canHold({ metadata }) || isStageDisabled}
+          onClick={handleHold}
+        >
+          Hold ✊
+        </button>
+        <button
+          disabled={!stage.canBurn({ metadata }) || isStageDisabled}
+          onClick={handleBurn}
+        >
+          Burn ️🔥
+        </button>
+        <button
+          disabled={!stage.canEvolve({ metadata }) || isStageDisabled}
+          onClick={handleEvolve}
+        >
+          Evolve 🧬
+        </button>
+        <button
+          disabled={!stage.canSell({ metadata }) || isStageDisabled}
+          onClick={handleSell}
+        >
+          Sell 💸
+        </button>
+      </div>
+      <div>
+        <button disabled={isPreviousDisabled} onClick={onPreviousStage}>
+          👈
+        </button>
+        <button disabled={isNextDisabled} onClick={onNextStage}>
+          👉
+        </button>
+      </div>
     </div>
   );
 }

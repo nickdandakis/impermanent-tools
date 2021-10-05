@@ -21,6 +21,8 @@ function PageLayout({ headerLinks = null, children }) {
         main {
           flex: 1;
           padding: 0 20px;
+          display: flex;
+          flex-flow: column;
         }
       `}</style>
     </div>

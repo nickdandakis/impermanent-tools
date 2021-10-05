@@ -85,16 +85,16 @@ function DecisionsPageHeader() {
         )}
       </p>
       <h2>
-        Run through your decisions one step at a time, completely hypothetically
+        Simulate all the possible decisions and outcomes at every stage for
+        Impermanent Digital ID:
       </h2>
       <style jsx>{`
         header {
           margin-bottom: 30px;
+          text-align: left;
         }
 
         p {
-          max-width: 60ch;
-          margin: 0 auto;
           line-height: 1.5;
           font-weight: 20px;
         }

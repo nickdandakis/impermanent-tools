@@ -38,3 +38,25 @@ a {
   font-size: inherit;
   text-decoration: none;
 }
+
+button {
+  all: initial;
+  font-family: "Terminal Grotesque", serif;
+  padding: 0.7em 1em;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  font-weight: bold;
+  font-size: 18px;
+  user-select: none;
+}
+button:hover {
+  transform: translateY(1px);
+}
+button:active {
+  transform: translateY(-1px);
+}
+button:disabled {
+  pointer-events: none;
+  opacity: 0.3;
+  cursor: not-allowed;
+}

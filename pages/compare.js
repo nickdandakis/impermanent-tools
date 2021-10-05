@@ -117,7 +117,13 @@ function ComparePage() {
         with&nbsp;
         {isReversed ? "CryptoPunk" : "Impermanent Digital"}
       </h1>
-      <IDInput ref={inputRef} value={inputValue} onChange={handleInputChange} />
+      <div className="input-wrapper">
+        <IDInput
+          ref={inputRef}
+          value={inputValue}
+          onChange={handleInputChange}
+        />
+      </div>
       <Comparator metadata={metadata} />
       <TraitsSection metadata={metadata} isReversed={isReversed} />
       <style jsx>{`
@@ -139,15 +145,8 @@ function ComparePage() {
           white-space: pre-line;
         }
 
-        .id-input {
-          font-size: 48px;
-          width: 100%;
-          text-align: center;
+        .input-wrapper {
           margin-bottom: 20px;
-          color: gray;
-        }
-        .id-input:focus {
-          color: black;
         }
 
         @media (max-width: 500px) {
