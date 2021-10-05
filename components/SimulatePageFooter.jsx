@@ -46,15 +46,19 @@ function SimulatePageFooter() {
         Simulate all the possible decisions and outcomes at every stage for
         Impermanent Digital ID.
       </p>
-      <p>
-        <small>
-          *only the first 50% of burned Lifecycle 1 IDs will be whitelisted for
-          the 3333 edition series to follow.
-          <br />
-          **Signature Edition 1/1s do not participate in the Lifecycle, and
-          receive an Afterlife 3 ID in addition to their 1/1, no burn required.
-        </small>
-      </p>
+      <small>
+        For burn decisions at all levels, your original ID ERC-721 token is
+        burned, and your Afterlife ID is minted as a new ERC-721 token.
+        <br />
+        Following this current series of 4444 (Punks), IDs will roll out in 3
+        more series — each &apos;killing&apos; off an existing collection.
+        <br />
+        Signature Edition 1/1s do not participate in the Lifecycle, and receive
+        an Afterlife 3 ID in addition to their 1/1, no burn required.
+        <br />
+        *only the first 50% of burned Lifecycle 1 IDs will be whitelisted for
+        the 3333 edition series to follow.
+      </small>
       <style jsx>{`
         footer {
           margin-bottom: 30px;
@@ -74,6 +78,11 @@ function SimulatePageFooter() {
         p {
           line-height: 1.5;
           font-weight: 20px;
+        }
+
+        small {
+          font-size: 10px;
+          line-height: 1;
         }
       `}</style>
     </footer>
