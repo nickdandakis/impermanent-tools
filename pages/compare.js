@@ -147,6 +147,7 @@ function ComparePage() {
 
         .input-wrapper {
           margin-bottom: 20px;
+          text-align: center;
         }
 
         @media (max-width: 500px) {

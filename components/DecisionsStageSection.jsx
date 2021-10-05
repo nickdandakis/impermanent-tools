@@ -21,10 +21,6 @@ function DecisionsStageSection({ stageIndex, metadata }) {
 
   return (
     <div className="stage-section">
-      <header>
-        <h3>{stage.heading}</h3>
-        <p>{stage?.body({ metadata })}</p>
-      </header>
       <Image
         src={
           afterlifeTrait

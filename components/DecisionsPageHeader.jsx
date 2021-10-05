@@ -61,19 +61,20 @@ function DecisionsPageHeader() {
 
   return (
     <header>
-      <h1>Decisions, decisions</h1>
       <p>
-        We are currently in <strong>{activeStage.heading}</strong>.<br />
-        Reveal happened&nbsp;
+        Revealed:&nbsp;
         <a href="#" onClick={handleDateCountdownClick}>
           {isShowingCountdowns
             ? formatDuration(countdownFromReveal, { delimiter: ", " }) + " ago"
             : "at " + format(revealDate, "yyyy-MM-dd HH:mm:ssxxx")}
         </a>
-        .<br />
+        <br />
+        Current stage: <strong>{activeStage.heading}</strong>
+        <br />
         {nextStage && (
           <>
-            {nextStage.heading}, the next stage, starts&nbsp;
+            Next stage: {nextStage.heading}
+            <br />
             <a href="#" onClick={handleDateCountdownClick}>
               {isShowingCountdowns
                 ? "in " +
@@ -84,10 +85,10 @@ function DecisionsPageHeader() {
           </>
         )}
       </p>
-      <h2>
+      <p>
         Simulate all the possible decisions and outcomes at every stage for
-        Impermanent Digital ID:
-      </h2>
+        Impermanent Digital ID.
+      </p>
       <style jsx>{`
         header {
           margin-bottom: 30px;

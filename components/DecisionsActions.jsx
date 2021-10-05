@@ -49,40 +49,36 @@ function DecisionsActions({
 
   return (
     <div className="actions">
-      <div>
-        <button
-          disabled={!stage.canHold({ metadata }) || isStageDisabled}
-          onClick={handleHold}
-        >
-          Hold ✊
-        </button>
-        <button
-          disabled={!stage.canBurn({ metadata }) || isStageDisabled}
-          onClick={handleBurn}
-        >
-          Burn ️🔥
-        </button>
-        <button
-          disabled={!stage.canEvolve({ metadata }) || isStageDisabled}
-          onClick={handleEvolve}
-        >
-          Evolve 🧬
-        </button>
-        <button
-          disabled={!stage.canSell({ metadata }) || isStageDisabled}
-          onClick={handleSell}
-        >
-          Sell 💸
-        </button>
-      </div>
-      <div>
-        <button disabled={isPreviousDisabled} onClick={onPreviousStage}>
-          👈
-        </button>
-        <button disabled={isNextDisabled} onClick={onNextStage}>
-          👉
-        </button>
-      </div>
+      <button
+        className="first"
+        disabled={!stage.canHold({ metadata }) || isStageDisabled}
+        onClick={handleHold}
+      >
+        Hold ✊
+      </button>
+      <button
+        disabled={!stage.canBurn({ metadata }) || isStageDisabled}
+        onClick={handleBurn}
+      >
+        Burn ️🔥
+      </button>
+      <button
+        disabled={!stage.canEvolve({ metadata }) || isStageDisabled}
+        onClick={handleEvolve}
+      >
+        Evolve 🧬
+      </button>
+      <button
+        disabled={!stage.canSell({ metadata }) || isStageDisabled}
+        onClick={handleSell}
+      >
+        Sell 💸
+      </button>
+      <style jsx>{`
+        .first {
+          padding-left: 0;
+        }
+      `}</style>
     </div>
   );
 }
