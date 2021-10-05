@@ -21,7 +21,27 @@
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
     "file-type": "^16.5.3",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.0",
     "node-fetch": "^3.0.0",
+    "prettier": "^2.4.1",
     "sharp": "^0.29.1"
-  }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{jsx,js}": "eslint --cache --fix",
+    "*.{js,jsx,css,md}": "prettier --write"
+  },
+  "engines": {
+    "node": "^16",
+    "npm": "^7"
+  },
+  "browserslist": [
+    "defaults",
+    "not ie <= 11"
+  ]
 }

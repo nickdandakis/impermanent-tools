@@ -35,7 +35,7 @@ function PageFooter() {
           <DiscordLogo />
         </a>
         <a
-          href="https://github.com/nickdandakis/impermanent-digital-comparison/"
+          href="https://github.com/nickdandakis/impermanent-tools/"
           target="_blank"
           rel="noreferrer"
         >

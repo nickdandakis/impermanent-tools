@@ -24,4 +24,4 @@ still costs $208,571. In turn about 69 Eth. If we all delist and repost for 69
 Eth it will cost 1 Lamborghini each to join into our project. We’re doing this
 all wrong.
 
-![perma hands](https://github.com/nickdandakis/impermanent-digital-comparison/blob/main/public/images/perma-hands.png?raw=true)
+![perma hands](https://github.com/nickdandakis/impermanent-tools/blob/main/public/images/perma-hands.png?raw=true)
