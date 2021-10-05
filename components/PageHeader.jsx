@@ -15,8 +15,8 @@ function PageHeader({ links = null }) {
             <Link href="/compare">
               <a>Compare</a>
             </Link>
-            <Link href="/decisions">
-              <a>Decisions</a>
+            <Link href="/simulate">
+              <a>Simulate</a>
             </Link>
           </>
         )}

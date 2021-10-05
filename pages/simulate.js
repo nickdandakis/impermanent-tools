@@ -2,20 +2,25 @@ import { useState, useCallback, useEffect } from "react";
 
 import stages from "../data/stages";
 import PageLayout from "../components/PageLayout";
-import DecisionsPageHeader from "../components/DecisionsPageHeader";
+import SimulatePageFooter from "../components/SimulatePageFooter";
 import IDInput from "../components/IDInput";
 import allMetadata from "../data/metadata.json";
-import DecisionsStageSection from "../components/DecisionsStageSection";
-import DecisionsActions from "../components/DecisionsActions";
+import SimulateStageSection from "../components/SimulateStageSection";
+import SimulateActions from "../components/SimulateActions";
 import classNames from "../utils/classNames";
 import getRandomInt from "../utils/getRandomInt";
+import { getSignatureEditionTrait } from "../utils/traits";
 
-function DecisionsPage() {
+function SimulatePage() {
   const [inputValue, setInputValue] = useState("");
   const [activeStageIndex, setActiveStageIndex] = useState(-1);
   const [answeredStageIndex, setAnsweredStageIndex] = useState(-1);
   const [metadataByStage, setMetadataByStage] = useState([]);
   const [hasSold, setHasSold] = useState(false);
+
+  const isSignatureEdition =
+    metadataByStage.length > 0 &&
+    !!getSignatureEditionTrait({ metadata: metadataByStage[0] });
 
   const handleReset = () => {
     const castedID = Number(inputValue);
@@ -75,7 +80,7 @@ function DecisionsPage() {
               {activeStageIndex !== -1 &&
                 stages.map((stage, stageIndex) => (
                   <div className="slide" key={stageIndex}>
-                    <DecisionsStageSection
+                    <SimulateStageSection
                       stageIndex={stageIndex}
                       activeStageIndex={activeStageIndex}
                       metadata={metadataByStage[stageIndex]}
@@ -121,8 +126,8 @@ function DecisionsPage() {
               </p>
             </header>
           )}
-          {activeStageIndex > -1 && (
-            <DecisionsActions
+          {activeStageIndex > -1 && !isSignatureEdition && (
+            <SimulateActions
               stage={stages[activeStageIndex]}
               metadata={metadataByStage[activeStageIndex]}
               isStageDisabled={
@@ -140,7 +145,7 @@ function DecisionsPage() {
             />
           )}
           <hr />
-          <DecisionsPageHeader />
+          <SimulatePageFooter />
         </div>
       </div>
       <style jsx>{`
@@ -224,11 +229,25 @@ function DecisionsPage() {
         hr {
           margin: 30px 0;
         }
+
+        @media (max-width: 500px) {
+          .column.main {
+            padding: 0;
+          }
+
+          .two-up > .column {
+            min-width: initial;
+          }
+
+          .container {
+            min-width: initial;
+          }
+        }
       `}</style>
     </div>
   );
 }
 
-DecisionsPage.getLayout = (page) => <PageLayout>{page}</PageLayout>;
+SimulatePage.getLayout = (page) => <PageLayout>{page}</PageLayout>;
 
-export default DecisionsPage;
+export default SimulatePage;

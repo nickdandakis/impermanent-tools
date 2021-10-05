@@ -9,7 +9,7 @@ import {
   getLifecycleTrait,
 } from "../utils/traits";
 
-function DecisionsStageSection({ stageIndex, metadata }) {
+function SimulateStageSection({ stageIndex, metadata }) {
   const stage = stages[stageIndex];
   const afterlifeTrait = getAfterlifeTrait({ metadata });
   const evolutionTrait = getEvolutionTrait({ metadata });
@@ -19,14 +19,39 @@ function DecisionsStageSection({ stageIndex, metadata }) {
     return null;
   }
 
+  const afterlifePlaceholderBackgroundColor = (() => {
+    switch (afterlifeTrait?.value) {
+      case 1:
+        return "0000FF";
+      case 2:
+        return "000099";
+      case 3:
+        return "00FFFF";
+      default:
+        return "#CCCCCC";
+    }
+  })();
+  const evolutionPlaceholderBackgroundColor = (() => {
+    switch (evolutionTrait?.value) {
+      case 1:
+        return "FF0000";
+      case 2:
+        return "990000";
+      case 3:
+        return "FFFF00";
+      default:
+        return "CCCCCC";
+    }
+  })();
+
   return (
     <div className="stage-section">
       <Image
         src={
           afterlifeTrait
-            ? `https://via.placeholder.com/500/0000FF/FFFFFC?text=L${lifecycleTrait.value}+AL${afterlifeTrait.value} placeholder`
+            ? `https://via.placeholder.com/500/${afterlifePlaceholderBackgroundColor}/FFFFFC?text=L${lifecycleTrait.value}+AL${afterlifeTrait.value} placeholder`
             : evolutionTrait
-            ? `https://via.placeholder.com/500/FF0000/FFFFFFC?text=L${lifecycleTrait.value}+EVO${evolutionTrait.value} placeholder`
+            ? `https://via.placeholder.com/500/${evolutionPlaceholderBackgroundColor}/FFFFFFC?text=L${lifecycleTrait.value}+EVO${evolutionTrait.value} placeholder`
             : metadata.image
         }
         width={500}
@@ -47,4 +72,4 @@ function DecisionsStageSection({ stageIndex, metadata }) {
   );
 }
 
-export default DecisionsStageSection;
+export default SimulateStageSection;

@@ -1,0 +1,83 @@
+import { useState, useEffect } from "react";
+import { format, isAfter, isBefore, intervalToDuration } from "date-fns";
+
+import stages, { revealDate } from "../data/stages";
+import DatesList from "../components/DatesList";
+
+const now = new Date(Date.now());
+
+const activeStage = stages.find(
+  (stage) => isAfter(now, stage.startsAt) && isBefore(now, stage.endsAt)
+);
+const activeStageIndex = stages.findIndex(
+  (stage) => stage.heading === activeStage.heading
+);
+const nextStage =
+  activeStageIndex !== stages.length - 1 ? stages[activeStageIndex + 1] : null;
+
+function SimulatePageFooter() {
+  return (
+    <footer>
+      <div className="dates-list-section">
+        <div className="dates-list-wrapper">
+          <DatesList
+            label="Revealed"
+            startsAt={revealDate}
+            endsAt={revealDate}
+            initialIsToggledFormat={true}
+          />
+        </div>
+        <div className="dates-list-wrapper">
+          <DatesList
+            label={`${activeStage.heading} — Current`}
+            startsAt={activeStage.startsAt}
+            endsAt={activeStage.endsAt}
+          />
+        </div>
+        <div className="dates-list-wrapper">
+          <DatesList
+            label={`${nextStage.heading} — Up next`}
+            startsAt={nextStage.startsAt}
+            endsAt={nextStage.endsAt}
+          />
+        </div>
+      </div>
+      <p>
+        Simulate all the possible decisions and outcomes at every stage for
+        Impermanent Digital ID.
+      </p>
+      <p>
+        <small>
+          *only the first 50% of burned Lifecycle 1 IDs will be whitelisted for
+          the 3333 edition series to follow.
+          <br />
+          **Signature Edition 1/1s do not participate in the Lifecycle, and
+          receive an Afterlife 3 ID in addition to their 1/1, no burn required.
+        </small>
+      </p>
+      <style jsx>{`
+        footer {
+          margin-bottom: 30px;
+          text-align: left;
+        }
+
+        .dates-list-section {
+          background: #eeeeee;
+          padding: 20px;
+          border-radius: 3px;
+        }
+
+        .dates-list-wrapper + .dates-list-wrapper {
+          margin-top: 20px;
+        }
+
+        p {
+          line-height: 1.5;
+          font-weight: 20px;
+        }
+      `}</style>
+    </footer>
+  );
+}
+
+export default SimulatePageFooter;

@@ -80,7 +80,9 @@ const stages = [
       ...metadata,
       name: `Evolved ID #${metadata.id}`,
       attributes: [
-        ...metadata.attributes,
+        ...metadata.attributes.filter(
+          ({ trait_type }) => !trait_type.toLowerCase().includes("evolution")
+        ),
         {
           trait_type: "Evolution",
           value: 2,
@@ -188,7 +190,9 @@ const stages = [
       ...metadata,
       name: `Evolved ID #${metadata.id}`,
       attributes: [
-        ...metadata.attributes,
+        ...metadata.attributes.filter(
+          ({ trait_type }) => !trait_type.toLowerCase().includes("evolution")
+        ),
         {
           trait_type: "Evolution",
           value: 3,
@@ -258,7 +262,7 @@ const stages = [
       const evolutionTrait = getEvolutionTrait({ metadata });
       return (
         Number(lifecycleTrait.value) === 3 &&
-        Number(evolutionTrait?.value) === 2
+        Number(evolutionTrait?.value) === 3
       );
     },
     canEvolve: () => false,

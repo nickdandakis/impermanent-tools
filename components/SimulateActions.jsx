@@ -1,6 +1,6 @@
 import { ButtonNext } from "pure-react-carousel";
 
-function DecisionsActions({
+function SimulateActions({
   stage,
   metadata,
   isStageDisabled,
@@ -69,6 +69,7 @@ function DecisionsActions({
         Evolve 🧬
       </button>
       <button
+        className="last"
         disabled={!stage.canSell({ metadata }) || isStageDisabled}
         onClick={handleSell}
       >
@@ -78,9 +79,21 @@ function DecisionsActions({
         .first {
           padding-left: 0;
         }
+
+        .last {
+          padding-right: 0;
+        }
+
+        .actions {
+          display: flex;
+          flex-flow: row;
+          justify-content: space-between;
+          max-width: 400px;
+          margin: 0 auto;
+        }
       `}</style>
     </div>
   );
 }
 
-export default DecisionsActions;
+export default SimulateActions;
