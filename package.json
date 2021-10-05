@@ -7,7 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write ."
   },
   "author": "",
   "license": "ISC",
@@ -33,7 +35,7 @@
     }
   },
   "lint-staged": {
-    "*.{jsx,js}": "eslint --cache --fix",
+    "*.{jsx,js}": "next lint --cache --fix",
     "*.{js,jsx,css,md}": "prettier --write"
   },
   "engines": {
