@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --check .",
-    "format:fix": "prettier --write ."
+    "format:fix": "prettier --write .",
+    "prepare": "husky install"
   },
   "author": "Nick Dandakis",
   "license": "MIT",
@@ -28,11 +29,6 @@
     "node-fetch": "^3.0.0",
     "prettier": "^2.4.1",
     "sharp": "^0.29.1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.{jsx,js}": "next lint --cache --fix",
