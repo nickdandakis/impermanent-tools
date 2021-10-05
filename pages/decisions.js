@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 import stages from "../data/stages";
 import PageLayout from "../components/PageLayout";
@@ -7,12 +7,19 @@ import IDInput from "../components/IDInput";
 import allMetadata from "../data/metadata.json";
 import DecisionsStageSection from "../components/DecisionsStageSection";
 import classNames from "../utils/classNames";
+import getRandomInt from "../utils/getRandomInt";
 
 function DecisionsPage() {
   const [inputValue, setInputValue] = useState("");
   const [activeStageIndex, setActiveStageIndex] = useState(-1);
   const [metadataByStage, setMetadataByStage] = useState([]);
   const [hasSold, setHasSold] = useState(false);
+
+  useEffect(() => {
+    if (inputValue?.length === 0) {
+      setInputValue(getRandomInt(0, 4444));
+    }
+  }, []);
 
   const handleInputChange = useCallback((event) => {
     const updatedID = event.target.value || "";

@@ -9,6 +9,7 @@ import TraitsSection from "../components/TraitsSection";
 import Comparator from "../components/Comparator";
 import { getPunkTrait } from "../utils/traits";
 import IDInput from "../components/IDInput";
+import getRandomInt from "../utils/getRandomInt";
 
 import ReactCompareImage from "../components/ReactCompareImage.tsx";
 import allMetadata from "../data/metadata.json";
@@ -37,7 +38,17 @@ function ComparePage() {
   const attributePunk = getPunkTrait({ metadata });
 
   useEffect(() => {
-    setInputValue(activeID);
+    if (!activeID) {
+      router.replace({
+        pathname: "/compare",
+        query: {
+          ...router.query,
+          id: getRandomInt(0, 4444),
+        },
+      });
+    } else {
+      setInputValue(activeID);
+    }
   }, [router]);
 
   useEffect(() => {

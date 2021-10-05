@@ -15,7 +15,7 @@ const activeStage = stages.find(
   (stage) => isAfter(now, stage.startsAt) && isBefore(now, stage.endsAt)
 );
 const activeStageIndex = stages.findIndex(
-  (stage) => stage.label === activeStage.label
+  (stage) => stage.heading === activeStage.heading
 );
 const nextStage =
   activeStageIndex !== stages.length - 1 ? stages[activeStageIndex + 1] : null;
@@ -63,7 +63,7 @@ function DecisionsPageHeader() {
     <header>
       <h1>Decisions, decisions</h1>
       <p>
-        We are currently in <strong>{activeStage.label}</strong>.<br />
+        We are currently in <strong>{activeStage.heading}</strong>.<br />
         Reveal happened&nbsp;
         <a href="#" onClick={handleDateCountdownClick}>
           {isShowingCountdowns
@@ -73,7 +73,7 @@ function DecisionsPageHeader() {
         .<br />
         {nextStage && (
           <>
-            {nextStage.label} (the next stage) starts&nbsp;
+            {nextStage.heading}, the next stage, starts&nbsp;
             <a href="#" onClick={handleDateCountdownClick}>
               {isShowingCountdowns
                 ? "in " +

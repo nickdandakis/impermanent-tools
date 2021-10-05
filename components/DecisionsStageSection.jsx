@@ -3,7 +3,12 @@ import Image from "next/image";
 
 import stages from "../data/stages";
 import TraitsSection from "../components/TraitsSection";
-import { getAfterlifeTrait, getEvolutionTrait } from "../utils/traits";
+import DecisionsActions from "../components/DecisionsActions";
+import {
+  getAfterlifeTrait,
+  getEvolutionTrait,
+  getLifecycleTrait,
+} from "../utils/traits";
 
 function DecisionsStageSection({
   stageIndex,
@@ -15,9 +20,9 @@ function DecisionsStageSection({
   onSell,
 }) {
   const stage = stages[stageIndex];
-  const [overloadedMetadata, setOverloadedMetadata] = useState(metadata);
   const afterlifeTrait = getAfterlifeTrait({ metadata });
   const evolutionTrait = getEvolutionTrait({ metadata });
+  const lifecycleTrait = getLifecycleTrait({ metadata });
 
   if (!metadata || !stage) {
     return null;
@@ -25,81 +30,30 @@ function DecisionsStageSection({
 
   const isStageDisabled = activeStageIndex > stageIndex || hasSold;
 
-  const handleHold = () => {
-    const updatedMetadata = stage.onHold({ metadata });
-    onNextStage();
-    if (updatedMetadata) {
-      onMetadataUpdate({ stageIndex, updatedMetadata });
-    }
-  };
-
-  const handleBurn = () => {
-    const updatedMetadata = stage.onBurn({ metadata });
-    onNextStage();
-    if (updatedMetadata) {
-      onMetadataUpdate({ stageIndex, updatedMetadata });
-    }
-  };
-
-  const handleEvolve = () => {
-    const updatedMetadata = stage.onEvolve({ metadata });
-    onNextStage();
-    if (updatedMetadata) {
-      onMetadataUpdate({ stageIndex, updatedMetadata });
-    }
-  };
-
-  const handleSell = () => {
-    if (confirm("Would you really sell here?")) {
-      if (confirm("What, and just give up on the art?")) {
-        if (confirm("You really don't want to build generational wealth?")) {
-          if (confirm("ngmi?")) {
-            onSell();
-          }
-        }
-      }
-    }
-  };
-
   return (
     <div className="stage-section">
-      <h3>{stage.label}</h3>
+      <h3>{stage.heading}</h3>
+      <p>{stage?.body({ metadata })}</p>
       <Image
         src={
-          afterlifeTrait || evolutionTrait
-            ? "https://via.placeholder.com/500"
+          afterlifeTrait
+            ? `https://via.placeholder.com/500/0000FF/FFFFFC?text=L${lifecycleTrait.value}+AL${afterlifeTrait.value} placeholder`
+            : evolutionTrait
+            ? `https://via.placeholder.com/500/FF0000/FFFFFFC?text=L${lifecycleTrait.value}+EVO${evolutionTrait.value} placeholder`
             : metadata.image
         }
         width={500}
         height={500}
       />
-      <TraitsSection metadata={overloadedMetadata} />
-      <div className="actions">
-        <button
-          disabled={!stage.canHold({ metadata }) || isStageDisabled}
-          onClick={handleHold}
-        >
-          Hold
-        </button>
-        <button
-          disabled={!stage.canBurn({ metadata }) || isStageDisabled}
-          onClick={handleBurn}
-        >
-          Burn
-        </button>
-        <button
-          disabled={!stage.canEvolve({ metadata }) || isStageDisabled}
-          onClick={handleEvolve}
-        >
-          Evolve
-        </button>
-        <button
-          disabled={!stage.canSell({ metadata }) || isStageDisabled}
-          onClick={handleSell}
-        >
-          Sell
-        </button>
-      </div>
+      <TraitsSection metadata={metadata} />
+      <DecisionsActions
+        stage={stage}
+        isStageDisabled={isStageDisabled}
+        metadata={metadata}
+        onNextStage={onNextStage}
+        onMetadataUpdate={onMetadataUpdate}
+        onSell={onSell}
+      />
       <style jsx>{`
         .stage-section {
           max-width: 500px;

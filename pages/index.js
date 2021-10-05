@@ -1,7 +1,6 @@
 import PageLayout from "../components/PageLayout";
 
 function IndexPage() {
-  console.log("a");
   return (
     <div>
       <h1>
