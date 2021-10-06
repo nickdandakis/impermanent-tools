@@ -5,6 +5,7 @@ import Image from "next/image";
 import PageHeader from "../components/PageHeader";
 import PageFooter from "../components/PageFooter";
 import PageLayout from "../components/PageLayout";
+import ColumnLayout from "../components/ColumnLayout";
 import TraitsSection from "../components/TraitsSection";
 import Comparator from "../components/Comparator";
 import { getPunkTrait } from "../utils/traits";
@@ -102,34 +103,59 @@ function ComparePage() {
 
   return (
     <div className="compare-page">
-      <a
-        href="#reverse"
-        onClick={handleReverse}
-        className="reverse-button"
-        key="reverse-button"
-      >
-        🔄 Reverse search
-      </a>
-      <h1>
-        Compare&nbsp;
-        {isReversed ? "Impermanent Digital" : "CryptoPunk"}
-        {`\n`}
-        with&nbsp;
-        {isReversed ? "CryptoPunk" : "Impermanent Digital"}
-      </h1>
-      <div className="input-wrapper">
-        <IDInput
-          ref={inputRef}
-          value={inputValue}
-          onChange={handleInputChange}
-        />
-      </div>
-      <Comparator metadata={metadata} />
-      <TraitsSection metadata={metadata} isReversed={isReversed} />
+      <ColumnLayout
+        side={
+          <>
+            <Comparator metadata={metadata} />
+            <TraitsSection metadata={metadata} isReversed={isReversed} />
+          </>
+        }
+        main={
+          <>
+            <div className="input-wrapper">
+              <IDInput
+                ref={inputRef}
+                value={inputValue}
+                onChange={handleInputChange}
+              />
+              <button
+                onClick={handleReverse}
+                className="reverse-button"
+                key="reverse-button"
+              >
+                🔄 Reverse search
+              </button>
+            </div>
+            <h3>
+              Comparing this&nbsp;
+              {isReversed ? "CryptoPunk" : "Impermanent Digital"}
+              &nbsp;against its&nbsp;
+              {isReversed ? "Impermanent Digital" : "CryptoPunk"}
+            </h3>
+            <hr />
+            <p>
+              Following this current series of 4444 (Punks), IDs will roll out
+              in 3 more series — each &apos;killing&apos; off an existing
+              collection. Each will follow a similar model to the 4444 series.
+              Each will have a lower supply than the previous — and access will
+              be initially geared towards Afterlife holders.
+            </p>
+            <p>
+              All lead up to the Auras project, a culmination of
+              Glassface&apos;s skillset. More on Auras will be announced soon —
+              it is a combination of many forms of media, and an evolution in AI
+              art tech.
+            </p>
+          </>
+        }
+      />
       <style jsx>{`
         .compare-page {
-          max-width: 500px;
-          margin: 0 auto;
+          display: flex;
+          flex-flow: column;
+          justify-content: flex-start;
+          flex: 1;
+          padding-top: 40px;
         }
 
         .reverse-button {
@@ -140,14 +166,14 @@ function ComparePage() {
           transform: translateY(2px);
         }
 
-        h1 {
-          font-size: 24px;
-          white-space: pre-line;
+        .input-wrapper {
+          display: flex;
+          flex-flow: row;
+          margin-bottom: 20px;
         }
 
-        .input-wrapper {
-          margin-bottom: 20px;
-          text-align: center;
+        .input-wrapper > button {
+          flex: 0 0 auto;
         }
 
         @media (max-width: 500px) {

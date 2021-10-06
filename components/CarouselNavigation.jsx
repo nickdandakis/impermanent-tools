@@ -24,6 +24,9 @@ function CarouselNavigation({
           font-size: 24px;
           background: rgba(0, 0, 0, 0.2);
         }
+        button:disabled {
+          opacity: 0;
+        }
       `}</style>
     </div>
   );

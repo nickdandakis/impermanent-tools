@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 
 import stages from "../data/stages";
 import PageLayout from "../components/PageLayout";
+import ColumnLayout from "../components/ColumnLayout";
 import SimulatePageFooter from "../components/SimulatePageFooter";
 import IDInput from "../components/IDInput";
 import allMetadata from "../data/metadata.json";
@@ -81,8 +82,8 @@ function SimulatePage() {
 
   return (
     <div className="decisions-page">
-      <div className="two-up">
-        <div className="column side">
+      <ColumnLayout
+        side={
           <div className={classNames("container", hasSold && "has-sold")}>
             <div className="carousel">
               {activeStageIndex !== -1 &&
@@ -108,59 +109,61 @@ function SimulatePage() {
               />
             </div>
           </div>
-        </div>
-        <div className="column main">
-          <div className="input-wrapper">
-            <IDInput value={inputValue} onChange={handleInputChange} />
-            <button onClick={handleReset} disabled={inputValue.length === 0}>
-              ⟳
-            </button>
-          </div>
-          {activeStageIndex > -1 && (
-            <header>
-              <div className="heading-wrapper">
-                <h3>{stages[activeStageIndex]?.heading}</h3>
-              </div>
-              <p>
-                {stages[activeStageIndex]?.body({
-                  metadata: metadataByStage[activeStageIndex],
-                })}
-              </p>
-            </header>
-          )}
-          {activeStageIndex > -1 && !isSignatureEdition && (
-            <SimulateActions
-              stage={stages[activeStageIndex]}
-              metadata={metadataByStage[activeStageIndex]}
-              action={actionsByStage[activeStageIndex]}
-              isStageDisabled={
-                hasSold || answeredStageIndex >= activeStageIndex
-              }
-              onPreviousStage={handlePreviousStage}
-              onNextStage={handleNextStage}
-              onMetadataUpdate={({ stageIndex, updatedMetadata, action }) => {
-                if (stageIndex > answeredStageIndex) {
-                  setAnsweredStageIndex(stageIndex);
+        }
+        main={
+          <>
+            <div className="input-wrapper">
+              <IDInput value={inputValue} onChange={handleInputChange} />
+              <button onClick={handleReset} disabled={inputValue.length === 0}>
+                ⟳ Reset
+              </button>
+            </div>
+            {activeStageIndex > -1 && (
+              <header>
+                <div className="heading-wrapper">
+                  <h3>{stages[activeStageIndex]?.heading}</h3>
+                </div>
+                <p>
+                  {stages[activeStageIndex]?.body({
+                    metadata: metadataByStage[activeStageIndex],
+                  })}
+                </p>
+              </header>
+            )}
+            {activeStageIndex > -1 && !isSignatureEdition && (
+              <SimulateActions
+                stage={stages[activeStageIndex]}
+                metadata={metadataByStage[activeStageIndex]}
+                action={actionsByStage[activeStageIndex]}
+                isStageDisabled={
+                  hasSold || answeredStageIndex >= activeStageIndex
                 }
-                setMetadataByStage([...metadataByStage, updatedMetadata]);
-                setActionsByStage({
-                  ...actionsByStage,
-                  [stageIndex]: action,
-                });
-              }}
-              onSell={() => {
-                setHasSold(true);
-                setActionsByStage({
-                  ...actionsByStage,
-                  [stageIndex]: SELL_ACTION,
-                });
-              }}
-            />
-          )}
-          <hr />
-          <SimulatePageFooter />
-        </div>
-      </div>
+                onPreviousStage={handlePreviousStage}
+                onNextStage={handleNextStage}
+                onMetadataUpdate={({ stageIndex, updatedMetadata, action }) => {
+                  if (stageIndex > answeredStageIndex) {
+                    setAnsweredStageIndex(stageIndex);
+                  }
+                  setMetadataByStage([...metadataByStage, updatedMetadata]);
+                  setActionsByStage({
+                    ...actionsByStage,
+                    [stageIndex]: action,
+                  });
+                }}
+                onSell={() => {
+                  setHasSold(true);
+                  setActionsByStage({
+                    ...actionsByStage,
+                    [stageIndex]: SELL_ACTION,
+                  });
+                }}
+              />
+            )}
+            <hr />
+            <SimulatePageFooter />
+          </>
+        }
+      />
       <style jsx>{`
         .decisions-page {
           flex: 1;
@@ -175,33 +178,12 @@ function SimulatePage() {
           flex-flow: row;
         }
 
-        .two-up {
-          flex: 1;
-          display: flex;
-          flex-flow: row wrap;
-          justify-content: space-between;
-          align-items: stretch;
-          max-width: 1440px;
-          margin: 0 auto;
-        }
-
-        .two-up > .column {
-          flex: 1 1 50%;
-          min-width: 400px;
+        .input-wrapper > button {
+          flex: 0 0 auto;
         }
 
         header p {
           max-width: 55ch;
-        }
-
-        .column.side {
-          display: flex;
-          flex-flow: column;
-        }
-
-        .column.main {
-          text-align: left;
-          padding: 0 20px;
         }
 
         .has-sold {
@@ -251,15 +233,6 @@ function SimulatePage() {
         }
 
         @media (max-width: 500px) {
-          .column.main {
-            min-width: 100%;
-            padding: 0;
-          }
-
-          .two-up > .column {
-            min-width: 100%;
-          }
-
           .container {
             min-width: 100%;
           }
