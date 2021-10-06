@@ -23,6 +23,8 @@ function PageLayout({ headerLinks = null, children }) {
           padding: 0 20px;
           display: flex;
           flex-flow: column;
+          justify-content: center;
+          align-items: center;
         }
       `}</style>
     </div>

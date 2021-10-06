@@ -9,7 +9,8 @@ function PageFooter() {
     <footer className="page-footer">
       <div className="left">
         <span className="last-updated">
-          Last updated: {new Date(metadataMeta.updatedAt).toLocaleDateString()}
+          Data last updated:{" "}
+          {new Date(metadataMeta.updatedAt).toLocaleDateString()}
         </span>
       </div>
       <div className="right">
@@ -71,6 +72,10 @@ function PageFooter() {
           flex: 1 1 40%;
           text-align: left;
           font-size: 14px;
+        }
+
+        .last-updated {
+          font-size: 10px;
         }
 
         @media (max-width: 500px) {

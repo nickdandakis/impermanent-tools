@@ -10,6 +10,7 @@ import SimulateActions from "../components/SimulateActions";
 import classNames from "../utils/classNames";
 import getRandomInt from "../utils/getRandomInt";
 import { getSignatureEditionTrait } from "../utils/traits";
+import CarouselNavigation from "../components/CarouselNavigation";
 
 function SimulatePage() {
   const [inputValue, setInputValue] = useState("");
@@ -88,6 +89,17 @@ function SimulatePage() {
                   </div>
                 ))}
             </div>
+            <div className="carousel-navigation-wrapper">
+              <CarouselNavigation
+                isPreviousDisabled={activeStageIndex <= 0}
+                isNextDisabled={
+                  activeStageIndex > stages.length - 1 ||
+                  answeredStageIndex < activeStageIndex
+                }
+                onPrevious={handlePreviousStage}
+                onNext={handleNextStage}
+              />
+            </div>
           </div>
         </div>
         <div className="column main">
@@ -101,23 +113,6 @@ function SimulatePage() {
             <header>
               <div className="heading-wrapper">
                 <h3>{stages[activeStageIndex]?.heading}</h3>
-                <div className="carousel-navigation">
-                  <button
-                    disabled={activeStageIndex <= 0}
-                    onClick={handlePreviousStage}
-                  >
-                    👈
-                  </button>
-                  <button
-                    disabled={
-                      activeStageIndex > stages.length - 1 ||
-                      answeredStageIndex < activeStageIndex
-                    }
-                    onClick={handleNextStage}
-                  >
-                    👉
-                  </button>
-                </div>
               </div>
               <p>
                 {stages[activeStageIndex]?.body({
@@ -212,6 +207,13 @@ function SimulatePage() {
           margin: 0 auto;
         }
 
+        .carousel-navigation-wrapper {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+        }
+
         .carousel {
           position: relative;
           width: ${stages.length * 100}%;
@@ -232,15 +234,16 @@ function SimulatePage() {
 
         @media (max-width: 500px) {
           .column.main {
+            min-width: 100%;
             padding: 0;
           }
 
           .two-up > .column {
-            min-width: initial;
+            min-width: 100%;
           }
 
           .container {
-            min-width: initial;
+            min-width: 100%;
           }
         }
       `}</style>

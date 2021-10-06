@@ -86,10 +86,18 @@ function SimulateActions({
 
         .actions {
           display: flex;
-          flex-flow: row;
+          flex-flow: row wrap;
           justify-content: space-between;
           max-width: 400px;
           margin: 0 auto;
+        }
+
+        @media (max-width: 500px) {
+          button {
+            width: 50%;
+            padding: 20px 0;
+            text-align: center;
+          }
         }
       `}</style>
     </div>

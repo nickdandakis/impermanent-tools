@@ -3,8 +3,8 @@ import * as React from "react";
 function TwitterLogo(props) {
   return (
     <svg
-      width={32}
-      height={26}
+      width={24}
+      height={20}
       xmlns="http://www.w3.org/2000/svg"
       preserveAspectRatio="xMidYMid"
       viewBox="0 0 256 209"

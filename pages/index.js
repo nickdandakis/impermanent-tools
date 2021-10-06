@@ -1,13 +1,11 @@
+import Image from "next/image";
+
 import PageLayout from "../components/PageLayout";
 
 function IndexPage() {
   return (
     <div>
-      <h1>
-        Community-maintained tools for the&nbsp;
-        <a href="https://impermanent.digital">Impermanent Digital</a>&nbsp;
-        collection
-      </h1>
+      <Image src="/images/roadmap.png" width={400} height={402} />
     </div>
   );
 }
