@@ -49,9 +49,9 @@ function SimulateStageSection({ stageIndex, metadata }) {
       <Image
         src={
           afterlifeTrait
-            ? `https://via.placeholder.com/500/${afterlifePlaceholderBackgroundColor}/FFFFFC?text=L${lifecycleTrait.value}+AL${afterlifeTrait.value} placeholder`
+            ? `https://via.placeholder.com/500/${afterlifePlaceholderBackgroundColor}/FFFFFC?text=L${lifecycleTrait.value}+AL${afterlifeTrait.value}`
             : evolutionTrait
-            ? `https://via.placeholder.com/500/${evolutionPlaceholderBackgroundColor}/FFFFFFC?text=L${lifecycleTrait.value}+EVO${evolutionTrait.value} placeholder`
+            ? `https://via.placeholder.com/500/${evolutionPlaceholderBackgroundColor}/FFFFFFC?text=L${lifecycleTrait.value}+EVO${evolutionTrait.value}`
             : metadata.image
         }
         width={500}
