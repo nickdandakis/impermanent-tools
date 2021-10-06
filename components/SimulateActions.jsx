@@ -1,8 +1,14 @@
 import { ButtonNext } from "pure-react-carousel";
 
+export const HOLD_ACTION = "HOLD_ACTION";
+export const BURN_ACTION = "BURN_ACTION";
+export const EVOLVE_ACTION = "EVOLVE_ACTION";
+export const SELL_ACTION = "SELL_ACTION";
+
 function SimulateActions({
   stage,
   metadata,
+  action,
   isStageDisabled,
   isPreviousDisabled,
   isNextDisabled,
@@ -15,7 +21,11 @@ function SimulateActions({
     const updatedMetadata = stage.onHold({ metadata });
     onNextStage();
     if (updatedMetadata) {
-      onMetadataUpdate({ stageIndex: stage.index, updatedMetadata });
+      onMetadataUpdate({
+        stageIndex: stage.index,
+        updatedMetadata,
+        action: HOLD_ACTION,
+      });
     }
   };
 
@@ -23,7 +33,11 @@ function SimulateActions({
     const updatedMetadata = stage.onBurn({ metadata });
     onNextStage();
     if (updatedMetadata) {
-      onMetadataUpdate({ stageIndex: stage.index, updatedMetadata });
+      onMetadataUpdate({
+        stageIndex: stage.index,
+        updatedMetadata,
+        action: BURN_ACTION,
+      });
     }
   };
 
@@ -31,7 +45,11 @@ function SimulateActions({
     const updatedMetadata = stage.onEvolve({ metadata });
     onNextStage();
     if (updatedMetadata) {
-      onMetadataUpdate({ stageIndex: stage.index, updatedMetadata });
+      onMetadataUpdate({
+        stageIndex: stage.index,
+        updatedMetadata,
+        action: EVOLVE_ACTION,
+      });
     }
   };
 
@@ -54,26 +72,26 @@ function SimulateActions({
         disabled={!stage.canHold({ metadata }) || isStageDisabled}
         onClick={handleHold}
       >
-        Hold ✊
+        {action === HOLD_ACTION && "✅"} Hold ✊
       </button>
       <button
         disabled={!stage.canBurn({ metadata }) || isStageDisabled}
         onClick={handleBurn}
       >
-        Burn ️🔥
+        {action === BURN_ACTION && "✅"} Burn ️🔥
       </button>
       <button
         disabled={!stage.canEvolve({ metadata }) || isStageDisabled}
         onClick={handleEvolve}
       >
-        Evolve 🧬
+        {action === EVOLVE_ACTION && "✅"} Evolve 🧬
       </button>
       <button
         className="last"
         disabled={!stage.canSell({ metadata }) || isStageDisabled}
         onClick={handleSell}
       >
-        Sell 💸
+        {action === SELL_ACTION && "✅"} Sell 💸
       </button>
       <style jsx>{`
         .first {

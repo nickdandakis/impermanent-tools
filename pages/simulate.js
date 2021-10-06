@@ -6,7 +6,12 @@ import SimulatePageFooter from "../components/SimulatePageFooter";
 import IDInput from "../components/IDInput";
 import allMetadata from "../data/metadata.json";
 import SimulateStageSection from "../components/SimulateStageSection";
-import SimulateActions from "../components/SimulateActions";
+import SimulateActions, {
+  HOLD_ACTION,
+  BURN_ACTION,
+  EVOLVE_ACTION,
+  SELL_ACTION,
+} from "../components/SimulateActions";
 import classNames from "../utils/classNames";
 import getRandomInt from "../utils/getRandomInt";
 import { getSignatureEditionTrait } from "../utils/traits";
@@ -17,6 +22,7 @@ function SimulatePage() {
   const [activeStageIndex, setActiveStageIndex] = useState(-1);
   const [answeredStageIndex, setAnsweredStageIndex] = useState(-1);
   const [metadataByStage, setMetadataByStage] = useState([]);
+  const [actionsByStage, setActionsByStage] = useState({});
   const [hasSold, setHasSold] = useState(false);
 
   const isSignatureEdition =
@@ -31,6 +37,7 @@ function SimulatePage() {
 
     setActiveStageIndex(-1);
     setAnsweredStageIndex(-1);
+    setActionsByStage({});
 
     if (metadata) {
       setMetadataByStage([metadata]);
@@ -125,18 +132,29 @@ function SimulatePage() {
             <SimulateActions
               stage={stages[activeStageIndex]}
               metadata={metadataByStage[activeStageIndex]}
+              action={actionsByStage[activeStageIndex]}
               isStageDisabled={
                 hasSold || answeredStageIndex >= activeStageIndex
               }
               onPreviousStage={handlePreviousStage}
               onNextStage={handleNextStage}
-              onMetadataUpdate={({ stageIndex, updatedMetadata }) => {
+              onMetadataUpdate={({ stageIndex, updatedMetadata, action }) => {
                 if (stageIndex > answeredStageIndex) {
                   setAnsweredStageIndex(stageIndex);
                 }
                 setMetadataByStage([...metadataByStage, updatedMetadata]);
+                setActionsByStage({
+                  ...actionsByStage,
+                  [stageIndex]: action,
+                });
               }}
-              onSell={() => setHasSold(true)}
+              onSell={() => {
+                setHasSold(true);
+                setActionsByStage({
+                  ...actionsByStage,
+                  [stageIndex]: SELL_ACTION,
+                });
+              }}
             />
           )}
           <hr />
