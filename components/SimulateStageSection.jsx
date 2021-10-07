@@ -111,7 +111,8 @@ function SimulateStageSection({ stageIndex, metadata }) {
 
       <style jsx global>{`
         .blurred {
-          filter: blur(10px) saturate(2) hue-rotate(90deg);
+          filter: blur(10px) saturate(${evolutionTrait?.value || 1})
+            hue-rotate(${(afterlifeTrait?.value || 0) * 90}deg);
         }
       `}</style>
     </div>
