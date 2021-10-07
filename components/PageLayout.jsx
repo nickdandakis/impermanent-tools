@@ -1,10 +1,10 @@
 import PageFooter from "../components/PageFooter";
 import PageHeader from "../components/PageHeader";
 
-function PageLayout({ headerLinks = null, children }) {
+function PageLayout({ headerLinks = null, children, subHeading }) {
   return (
     <div className="page">
-      <PageHeader links={headerLinks} />
+      <PageHeader links={headerLinks} subHeading={subHeading} />
       <main>{children}</main>
       <PageFooter />
       <style jsx>{`

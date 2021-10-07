@@ -18,6 +18,10 @@ const nextStage =
 function SimulatePageFooter() {
   return (
     <footer>
+      <p>
+        Simulate all the possible decisions and outcomes at every stage for
+        Impermanent Digital ID.
+      </p>
       <div className="dates-list-section">
         <div className="dates-list-wrapper">
           <DatesList
@@ -42,13 +46,11 @@ function SimulatePageFooter() {
           />
         </div>
       </div>
-      <p>
-        Simulate all the possible decisions and outcomes at every stage for
-        Impermanent Digital ID.
-      </p>
       <small>
         For burn decisions at all levels, your original ID ERC-721 token is
         burned, and your Afterlife ID is minted as a new ERC-721 token.
+        <br />
+        Burning costs gas, evolving is free.
         <br />
         Following this current series of 4444 (Punks), IDs will roll out in 3
         more series — each &apos;killing&apos; off an existing collection.
@@ -69,6 +71,7 @@ function SimulatePageFooter() {
           background: #eeeeee;
           padding: 20px;
           border-radius: 3px;
+          margin-bottom: 20px;
         }
 
         .dates-list-wrapper + .dates-list-wrapper {
@@ -78,6 +81,7 @@ function SimulatePageFooter() {
         p {
           line-height: 1.5;
           font-weight: 20px;
+          margin-top: 0;
         }
 
         small {

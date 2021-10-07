@@ -37,6 +37,10 @@ h6 {
 a {
   font-size: inherit;
   text-decoration: none;
+  color: blue;
+}
+a:hover {
+  color: #9bfc75;
 }
 
 button {
@@ -48,9 +52,11 @@ button {
   font-weight: bold;
   font-size: 18px;
   user-select: none;
+  color: blue;
 }
 button:hover {
   transform: translateY(1px);
+  color: #9bfc75;
 }
 button:active {
   transform: translateY(-1px);

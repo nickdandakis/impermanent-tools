@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 
 import stages from "../data/stages";
+import { SubHeading } from "../components/PageHeader";
 import PageLayout from "../components/PageLayout";
 import ColumnLayout from "../components/ColumnLayout";
 import SimulatePageFooter from "../components/SimulatePageFooter";
@@ -182,6 +183,10 @@ function SimulatePage() {
           flex: 0 0 auto;
         }
 
+        h3 {
+          margin: 0 0 10px 0;
+        }
+
         header p {
           max-width: 55ch;
         }
@@ -242,6 +247,10 @@ function SimulatePage() {
   );
 }
 
-SimulatePage.getLayout = (page) => <PageLayout>{page}</PageLayout>;
+SimulatePage.getLayout = (page) => (
+  <PageLayout subHeading={<SubHeading heading="Decision Simulator" />}>
+    {page}
+  </PageLayout>
+);
 
 export default SimulatePage;

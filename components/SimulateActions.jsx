@@ -66,33 +66,35 @@ function SimulateActions({
   };
 
   return (
-    <div className="actions">
-      <button
-        className="first"
-        disabled={!stage.canHold({ metadata }) || isStageDisabled}
-        onClick={handleHold}
-      >
-        {action === HOLD_ACTION && "✅"} Hold ✊
-      </button>
-      <button
-        disabled={!stage.canBurn({ metadata }) || isStageDisabled}
-        onClick={handleBurn}
-      >
-        {action === BURN_ACTION && "✅"} Burn ️🔥
-      </button>
-      <button
-        disabled={!stage.canEvolve({ metadata }) || isStageDisabled}
-        onClick={handleEvolve}
-      >
-        {action === EVOLVE_ACTION && "✅"} Evolve 🧬
-      </button>
-      <button
-        className="last"
-        disabled={!stage.canSell({ metadata }) || isStageDisabled}
-        onClick={handleSell}
-      >
-        {action === SELL_ACTION && "✅"} Sell 💸
-      </button>
+    <>
+      <div className="actions">
+        <button
+          className="first"
+          disabled={!stage.canHold({ metadata }) || isStageDisabled}
+          onClick={handleHold}
+        >
+          {action === HOLD_ACTION && "✅"} Hold ✊
+        </button>
+        <button
+          disabled={!stage.canBurn({ metadata }) || isStageDisabled}
+          onClick={handleBurn}
+        >
+          {action === BURN_ACTION && "✅"} Burn ️🔥
+        </button>
+        <button
+          disabled={!stage.canEvolve({ metadata }) || isStageDisabled}
+          onClick={handleEvolve}
+        >
+          {action === EVOLVE_ACTION && "✅"} Evolve 🧬
+        </button>
+        <button
+          className="last"
+          disabled={!stage.canSell({ metadata }) || isStageDisabled}
+          onClick={handleSell}
+        >
+          {action === SELL_ACTION && "✅"} Sell 💸
+        </button>
+      </div>
       <style jsx>{`
         .first {
           padding-left: 0;
@@ -106,7 +108,6 @@ function SimulateActions({
           display: flex;
           flex-flow: row wrap;
           justify-content: space-between;
-          max-width: 400px;
           margin: 0 auto;
         }
 
@@ -118,7 +119,7 @@ function SimulateActions({
           }
         }
       `}</style>
-    </div>
+    </>
   );
 }
 

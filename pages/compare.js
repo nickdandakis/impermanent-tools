@@ -2,8 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
-import PageHeader from "../components/PageHeader";
-import PageFooter from "../components/PageFooter";
+import { SubHeading } from "../components/PageHeader";
 import PageLayout from "../components/PageLayout";
 import ColumnLayout from "../components/ColumnLayout";
 import TraitsSection from "../components/TraitsSection";
@@ -39,6 +38,10 @@ function ComparePage() {
   const attributePunk = getPunkTrait({ metadata });
 
   useEffect(() => {
+    if (!router.isReady) {
+      return;
+    }
+
     if (!activeID) {
       router.replace({
         pathname: "/compare",
@@ -194,7 +197,11 @@ function ComparePage() {
 }
 
 ComparePage.getLayout = (page) => {
-  return <PageLayout>{page}</PageLayout>;
+  return (
+    <PageLayout subHeading={<SubHeading heading="Comparison Tool" />}>
+      {page}
+    </PageLayout>
+  );
 };
 
 export default ComparePage;

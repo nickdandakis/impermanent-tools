@@ -8,6 +8,7 @@ import {
   getEvolutionTrait,
   getLifecycleTrait,
 } from "../utils/traits";
+import classNames from "../utils/classNames";
 
 function SimulateStageSection({ stageIndex, metadata }) {
   const stage = stages[stageIndex];
@@ -19,53 +20,98 @@ function SimulateStageSection({ stageIndex, metadata }) {
     return null;
   }
 
-  const afterlifePlaceholderBackgroundColor = (() => {
-    switch (afterlifeTrait?.value) {
-      case 1:
-        return "0000FF";
-      case 2:
-        return "000099";
-      case 3:
-        return "00FFFF";
-      default:
-        return "#CCCCCC";
-    }
-  })();
-  const evolutionPlaceholderBackgroundColor = (() => {
-    switch (evolutionTrait?.value) {
-      case 1:
-        return "FF0000";
-      case 2:
-        return "990000";
-      case 3:
-        return "FFFF00";
-      default:
-        return "CCCCCC";
-    }
-  })();
+  const hasPlaceholderImage = !!(afterlifeTrait || evolutionTrait);
+
+  const label =
+    hasPlaceholderImage &&
+    [
+      "PLACEHOLDER!",
+      `LIFECYCLE ${lifecycleTrait.value}`,
+      afterlifeTrait?.value && `AFTERLIFE ${afterlifeTrait.value}`,
+      evolutionTrait?.value && `EVOLUTION ${evolutionTrait.value}`,
+      "PLACEHOLDER! FOR SIMULATION PURPOSES ONLY, DOES NOT REPRESENT FINAL ART.",
+    ]
+      .filter(Boolean)
+      .join(" ");
 
   return (
     <div className="stage-section">
-      <Image
-        src={
-          afterlifeTrait
-            ? `https://via.placeholder.com/500/${afterlifePlaceholderBackgroundColor}/FFFFFC?text=L${lifecycleTrait.value}+AL${afterlifeTrait.value}`
-            : evolutionTrait
-            ? `https://via.placeholder.com/500/${evolutionPlaceholderBackgroundColor}/FFFFFFC?text=L${lifecycleTrait.value}+EVO${evolutionTrait.value}`
-            : metadata.image
-        }
-        width={500}
-        height={500}
-      />
+      <div className="image-wrapper">
+        <Image
+          className={classNames(hasPlaceholderImage && "blurred")}
+          src={metadata.image}
+          width={500}
+          height={500}
+        />
+        {hasPlaceholderImage && (
+          <div className="overlay">
+            <span className="label">{label}</span>
+          </div>
+        )}
+      </div>
       <TraitsSection metadata={metadata} />
       <style jsx>{`
+        @keyframes marquee {
+          0% {
+            transform: translate(0%, -50%);
+          }
+          50% {
+            transform: translate(-100%, -50%);
+          }
+          50.001% {
+            transform: translate(100%, -50%);
+          }
+          100% {
+            transform: translate(0%, -50%);
+          }
+        }
+
         header {
           text-align: left;
+        }
+
+        .blurred {
+          filter: blur(10px);
+        }
+
+        .image-wrapper {
+          line-height: 0;
+          position: relative;
+        }
+
+        .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.2);
+        }
+
+        .label {
+          font-weight: bold;
+          font-family: "Terminal Grotesque";
+          font-size: 48px;
+          color: rgba(255, 255, 255, 0.8);
+          user-select: none;
+          pointer-events: none;
+          animation: marquee 32s linear infinite;
+          animation-play-state: running;
+          width: max-content;
+          position: absolute;
+          top: 50%;
+          left: 0;
         }
 
         .stage-section {
           max-width: 500px;
           margin: 0 auto;
+        }
+      `}</style>
+
+      <style jsx global>{`
+        .blurred {
+          filter: blur(10px) saturate(2) hue-rotate(90deg);
         }
       `}</style>
     </div>
