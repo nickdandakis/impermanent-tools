@@ -1,5 +1,5 @@
 {
-  "name": "impermanent-digital-comparison",
+  "name": "impermanent-tools",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
@@ -7,18 +7,41 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "prepare": "husky install"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Nick Dandakis",
+  "license": "MIT",
   "dependencies": {
+    "date-fns": "^2.24.0",
     "next": "^11.1.2",
+    "pure-react-carousel": "^1.27.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
+    "eslint-config-prettier": "^8.3.0",
     "file-type": "^16.5.3",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.0",
     "node-fetch": "^3.0.0",
+    "prettier": "^2.4.1",
     "sharp": "^0.29.1"
-  }
+  },
+  "lint-staged": {
+    "*.{jsx,js}": "eslint --fix",
+    "*.{js,jsx,css,md}": "prettier --write"
+  },
+  "engines": {
+    "node": "^14",
+    "npm": "^7"
+  },
+  "browserslist": [
+    "defaults",
+    "not ie <= 11"
+  ]
 }

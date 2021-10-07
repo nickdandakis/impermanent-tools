@@ -1,10 +1,10 @@
-import * as React from "react"
+import * as React from "react";
 
 function GithubLogo(props) {
   return (
     <svg
-      width={29}
-      height={28}
+      width={20}
+      height={20}
       xmlns="http://www.w3.org/2000/svg"
       preserveAspectRatio="xMidYMid"
       viewBox="0 0 256 250"
@@ -15,7 +15,7 @@ function GithubLogo(props) {
         fill="#161614"
       />
     </svg>
-  )
+  );
 }
 
 export default GithubLogo;

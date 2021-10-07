@@ -1,4 +1,4 @@
-import getRandomInt from './getRandomInt';
+import getRandomInt from "./getRandomInt";
 
 function getRandomColor() {
   const h = getRandomInt(0, 360);

@@ -1,5 +1,5 @@
-import sharp from 'sharp';
-import { promises as fs } from 'fs';
+import sharp from "sharp";
+import { promises as fs } from "fs";
 
 const COLUMNS = 100;
 const WIDTH = 24;
@@ -8,7 +8,7 @@ const MIN_PUNKS_COUNT = 0;
 const MAX_PUNKS_COUNT = 10000;
 
 (async () => {
-  const punksSpritesheetFile = await fs.readFile('public/images/punks.png');
+  const punksSpritesheetFile = await fs.readFile("public/images/punks.png");
 
   for (let i = MIN_PUNKS_COUNT; i < MAX_PUNKS_COUNT; i += 1) {
     const left = (i % COLUMNS) * HEIGHT;
@@ -17,8 +17,8 @@ const MAX_PUNKS_COUNT = 10000;
     sharp(punksSpritesheetFile)
       .extract({ left, top, width: WIDTH, height: HEIGHT })
       .toFile(`public/images/punk-${i}.png`, function (err) {
-          if (err) console.log(err);
-      })
+        if (err) console.log(err);
+      });
 
     console.log(`Sliced punk ${i} @ [${left}, ${top}]`);
   }
