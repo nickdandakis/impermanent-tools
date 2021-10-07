@@ -18,7 +18,6 @@ export const SubHeading = ({ heading }) => {
         .sub-heading {
           font-family: "Terminal Grotesque";
           font-size: 24px;
-          font-weight: bold;
           text-transform: uppercase;
           letter-spacing: 0.01em;
           margin-bottom: 0;
@@ -27,10 +26,12 @@ export const SubHeading = ({ heading }) => {
 
         .sub-heading .black {
           color: black;
+          font-weight: bold;
         }
 
         .sub-heading .green {
           color: #9bfc75;
+          font-weight: normal;
         }
       `}</style>
     </h2>

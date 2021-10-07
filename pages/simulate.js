@@ -155,7 +155,7 @@ function SimulatePage() {
                   setHasSold(true);
                   setActionsByStage({
                     ...actionsByStage,
-                    [stageIndex]: SELL_ACTION,
+                    [activeStageIndex]: SELL_ACTION,
                   });
                 }}
               />
