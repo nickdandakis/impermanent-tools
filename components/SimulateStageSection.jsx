@@ -25,11 +25,9 @@ function SimulateStageSection({ stageIndex, metadata }) {
   const label =
     hasPlaceholderImage &&
     [
-      "PLACEHOLDER!",
       `LIFECYCLE ${lifecycleTrait.value}`,
       afterlifeTrait?.value && `AFTERLIFE ${afterlifeTrait.value}`,
       evolutionTrait?.value && `EVOLUTION ${evolutionTrait.value}`,
-      "PLACEHOLDER! FOR SIMULATION PURPOSES ONLY, DOES NOT REPRESENT FINAL ART.",
     ]
       .filter(Boolean)
       .join(" ");
@@ -95,7 +93,7 @@ function SimulateStageSection({ stageIndex, metadata }) {
           color: rgba(255, 255, 255, 0.8);
           user-select: none;
           pointer-events: none;
-          animation: marquee 32s linear infinite;
+          animation: marquee 6s linear infinite;
           animation-play-state: running;
           width: max-content;
           position: absolute;
