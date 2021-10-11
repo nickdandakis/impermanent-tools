@@ -10,7 +10,7 @@ const stages = [
     heading: "Stage 1 (pre-decision period)",
     body: () => "",
     startsAt: revealDate,
-    endsAt: addWeeks(revealDate, 4),
+    endsAt: addWeeks(revealDate, 3),
     canHold: () => true,
     canBurn: () => false,
     canEvolve: () => false,
@@ -39,7 +39,7 @@ const stages = [
         }
       })();
     },
-    startsAt: addWeeks(revealDate, 4),
+    startsAt: addWeeks(revealDate, 3),
     endsAt: addWeeks(revealDate, 8),
     canHold: () => true,
     canBurn: ({ metadata }) => {
