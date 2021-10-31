@@ -120,6 +120,13 @@ function TimelinePage() {
         .button {
           padding: 0;
         }
+
+        @media (max-width: 500px) {
+          .legend {
+            bottom: 20px;
+            left: 20px;
+          }
+        }
       `}</style>
     </div>
   );

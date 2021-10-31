@@ -42,6 +42,23 @@ const DateLine = forwardRef(({ date, label, secondsFromStart }, ref) => {
           width: max-content;
           padding-left: 1.5em;
         }
+
+        @media (max-width: 500px) {
+          .date-section {
+            transform: translateX(-50%);
+            text-align: center;
+          }
+
+          h2:before {
+            content: "";
+          }
+
+          h3 {
+            padding-left: 0;
+            width: auto;
+            position: static;
+          }
+        }
       `}</style>
     </div>
   );
