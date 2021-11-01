@@ -14,28 +14,44 @@ import EvolutionStatisticsCardContainer from "../containers/EvolutionStatisticsC
 
 function StatisticsPage() {
   return (
-    <div className="statistics-page">
-      {LIFECYCLE_TRAITS.map((lifecycle) => (
-        <LifecycleStatisticsCardContainer
-          lifecycle={lifecycle}
-          key={lifecycle}
+    <>
+      <header>
+        Supplements the&nbsp;
+        <a href="https://dune.xyz/dandankis/Impermanent-Digital">
+          Dune dashboard
+        </a>
+        . Shout-out <a href="https://zora.co">Zora</a> for the Indexer API love
+        🥰 wagmi 📈
+      </header>
+      <div className="statistics-page">
+        {LIFECYCLE_TRAITS.map((lifecycle) => (
+          <LifecycleStatisticsCardContainer
+            lifecycle={lifecycle}
+            key={lifecycle}
+          />
+        ))}
+        {WAVELENGTHS.map((wavelength) => (
+          <WavelengthStatisticsCardContainer
+            wavelength={wavelength}
+            key={wavelength}
+          />
+        ))}
+        <EvolutionStatisticsCardContainer
+          lifecycle={LIFECYCLE_TRAIT_2}
+          evolution={EVOLUTION_STAGE_2}
         />
-      ))}
-      {WAVELENGTHS.map((wavelength) => (
-        <WavelengthStatisticsCardContainer
-          wavelength={wavelength}
-          key={wavelength}
+        <EvolutionStatisticsCardContainer
+          lifecycle={LIFECYCLE_TRAIT_3}
+          evolution={EVOLUTION_STAGE_2}
         />
-      ))}
-      <EvolutionStatisticsCardContainer
-        lifecycle={LIFECYCLE_TRAIT_2}
-        evolution={EVOLUTION_STAGE_2}
-      />
-      <EvolutionStatisticsCardContainer
-        lifecycle={LIFECYCLE_TRAIT_3}
-        evolution={EVOLUTION_STAGE_2}
-      />
+      </div>
       <style jsx>{`
+        header {
+          padding-top: 80px;
+          padding-bottom: 80px;
+          max-width: 30ch;
+        }
+
         .statistics-page {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -46,7 +62,7 @@ function StatisticsPage() {
           padding: 40px;
         }
       `}</style>
-    </div>
+    </>
   );
 }
 

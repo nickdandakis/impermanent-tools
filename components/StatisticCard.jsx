@@ -65,11 +65,14 @@ function StatisticCard({ heading, children, isFetching, suffix }) {
           flex-flow: column;
           justify-content: center;
           align-items: center;
+          font-weight: bold;
         }
 
         .suffix {
           font-size: 0.3em;
+          font-weight: normal;
           display: block;
+          font-family: "Terminal Grotesque";
         }
       `}</style>
     </div>
