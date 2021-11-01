@@ -1,7 +1,10 @@
 import Head from "next/head";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 import "../styles/typography.css";
 import "../styles/base.css";
+
+const queryClient = new QueryClient();
 
 function Application({ Component, pageProps }) {
   // persistent layouts from:
@@ -24,7 +27,9 @@ function Application({ Component, pageProps }) {
           key="og:image"
         />
       </Head>
-      {getLayout(<Component {...pageProps} />)}
+      <QueryClientProvider client={queryClient}>
+        {getLayout(<Component {...pageProps} />)}
+      </QueryClientProvider>
     </>
   );
 }
