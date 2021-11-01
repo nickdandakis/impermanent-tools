@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import Head from "next/head";
 
 import stages from "../data/stages";
 import { SubHeading } from "../components/PageHeader";
@@ -83,6 +84,19 @@ function SimulatePage() {
 
   return (
     <div className="decisions-page">
+      <Head>
+        <title key="title">Impermanent Tools | Decision Simulator</title>
+        <meta
+          name="description"
+          content="Step through the future stages of the Impermanent Digital roadmap, and simulate your available actions against some ID"
+          key="description"
+        />
+        <meta
+          property="og:image"
+          content="https://www.impermanent.tools/images/reincarnated-psychonaut-jerry-garcia.png"
+          key="og:image"
+        />
+      </Head>
       <ColumnLayout
         side={
           <div className={classNames("container", hasSold && "has-sold")}>

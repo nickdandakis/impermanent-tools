@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 import { SubHeading } from "../components/PageHeader";
 import PageLayout from "../components/PageLayout";
 import { useAggregationsEvolution } from "../queries/impermanentDigital";
@@ -14,7 +16,20 @@ import EvolutionStatisticsCardContainer from "../containers/EvolutionStatisticsC
 
 function StatisticsPage() {
   return (
-    <>
+    <div className="statistics-page">
+      <Head>
+        <title key="title">Impermanent Tools | Statistics Dashboard</title>
+        <meta
+          name="description"
+          content="Huge alpha for your due dilly"
+          key="description"
+        />
+        <meta
+          property="og:image"
+          content="https://www.impermanent.tools/images/perma-hands.png"
+          key="og:image"
+        />
+      </Head>
       <header>
         Supplements the&nbsp;
         <a href="https://dune.xyz/dandankis/Impermanent-Digital">
@@ -23,7 +38,7 @@ function StatisticsPage() {
         . Shout-out <a href="https://zora.co">Zora</a> for the Indexer API love
         🥰 wagmi 📈
       </header>
-      <div className="statistics-page">
+      <div className="container">
         {LIFECYCLE_TRAITS.map((lifecycle) => (
           <LifecycleStatisticsCardContainer
             lifecycle={lifecycle}
@@ -46,23 +61,28 @@ function StatisticsPage() {
         />
       </div>
       <style jsx>{`
+        .statistics-page {
+          width: 100%;
+        }
+
         header {
           padding-top: 80px;
           padding-bottom: 80px;
           max-width: 30ch;
+          margin: 0 auto;
         }
 
-        .statistics-page {
+        .container {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
           grid-template-rows: repeat(6, 200px);
           grid-gap: 40px;
           grid-auto-flow: dense;
-          width: 100vw;
+          width: 100%;
           padding: 40px;
         }
       `}</style>
-    </>
+    </div>
   );
 }
 

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Head from "next/head";
 
 import { SubHeading } from "../components/PageHeader";
 import PageLayout from "../components/PageLayout";
@@ -106,6 +107,19 @@ function ComparePage() {
 
   return (
     <div className="compare-page">
+      <Head>
+        <title key="title">Impermanent Tools | Comparison Tool</title>
+        <meta
+          name="description"
+          content="Compare CryptoPunk with Impermanent Digital, and vice-versa"
+          key="description"
+        />
+        <meta
+          property="og:image"
+          content="https://www.impermanent.tools/images/comparison-og-image.png"
+          key="og:image"
+        />
+      </Head>
       <ColumnLayout
         side={
           <>

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, forwardRef } from "react";
 import { differenceInSeconds } from "date-fns";
+import Head from "next/head";
 
 import { SubHeading } from "../components/PageHeader";
 import PageLayout from "../components/PageLayout";
@@ -46,6 +47,15 @@ function TimelinePage() {
 
   return (
     <div className="timeline-page">
+      <Head>
+        <title key="title">Impermanent Tools | Timeline Visualizer</title>
+        <meta name="description" content="wen?" key="description" />
+        <meta
+          property="og:image"
+          content="https://www.impermanent.tools/images/perma-hands.png"
+          key="og:image"
+        />
+      </Head>
       <div className="container">
         <div className="legend">
           <button onClick={handleJumpToNow} className="button">

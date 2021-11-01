@@ -23,7 +23,7 @@ function Application({ Component, pageProps }) {
         />
         <meta
           property="og:image"
-          content="https://www.impermanent.tools/images/comparison-og-image.png"
+          content="https://www.impermanent.tools/images/impermanent-logo.png"
           key="og:image"
         />
       </Head>

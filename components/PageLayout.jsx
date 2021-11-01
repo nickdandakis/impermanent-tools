@@ -25,6 +25,7 @@ function PageLayout({ headerLinks = null, children, subHeading }) {
           flex-flow: column;
           justify-content: center;
           align-items: center;
+          width: 100%;
         }
       `}</style>
     </div>
