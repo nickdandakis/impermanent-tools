@@ -36,6 +36,8 @@ export const ALPHA_WAVELENGTH = "Alpha";
 export const ZETA_WAVELENGTH = "Zeta";
 export const ASTRA_WAVELENGTH = "Astra";
 export const MAGICA_WAVELENGTH = "Magica";
+// TODO yeah, this wavelength for some reason has a trailing space in the metadata API
+export const SUPERPARALLEL_WAVELENGTH = "Superparallel ";
 export const WAVELENGTHS = [
   DELTA_WAVELENGTH,
   MICRO_WAVELENGTH,
@@ -52,6 +54,7 @@ export const WAVELENGTHS = [
   ZETA_WAVELENGTH,
   ASTRA_WAVELENGTH,
   MAGICA_WAVELENGTH,
+  SUPERPARALLEL_WAVELENGTH,
 ];
 
 // EVOLUTION STAGES
